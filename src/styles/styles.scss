@@ -1,0 +1,81 @@
+:root {
+    --backgroundColour: #221F2D;
+    --backgroundColourSecondary: #242130;
+    --contentBackgroundColour: #353549;
+    --textColour: #fff;
+    --textColourSecondary: #f2f2f2;
+    --headerFont: 'roboto', helvetica, arial;
+    --bodyFont: 'roboto', helvetica, arial;
+}
+
+.App {
+    text-align: center;
+    min-height: 100vh;
+    background: linear-gradient( -45deg, var(--backgroundColour) 0%, var(--backgroundColour) 50%, var(--backgroundColourSecondary) 50%, var(--backgroundColourSecondary) 100%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: var(--textColour);
+    font-family: var(--bodyFont);
+}
+
+.App-logo {
+    -webkit-animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-title {
+    font-size: 2.5em;
+    font-family: var(--headerFont);
+    font-weight: 300;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+label {
+    display: block;
+    margin-top: 2em;
+    text-align: left;
+}
+
+input {
+    display: block;
+    background: transparent;
+    font-size: 1rem;
+    border: solid 1.5px #fff;
+    border-radius: 5px;
+    line-height: 1.5;
+    padding: 0.5em 1em;
+    color: var(--textColourSecondary);
+    font-weight: 300;
+    margin-top: 1em;
+    ;
+}
+
+.submit-btn {
+    color: inherit;
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: 0.5em 1em 0.4em;
+    border-radius: 5px;
+    background: transparent;
+    border: solid 1.5px #fff;
+}
+
+.colour {
+    margin-top: 2.5em;
+}
+
+.add-colour {
+    padding: 1.5em;
+    background: var(--contentBackgroundColour);
+}

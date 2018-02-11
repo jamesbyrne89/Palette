@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/styles.css';
 import base from './db/base';
+import Colour from './components/Colour';
 
 class App extends Component {
   constructor() {
@@ -54,28 +55,22 @@ class App extends Component {
   }
 
   render() {
+
+    const { colours } = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-
-        </header>
         <main className="colours">
-          <h1 className="App-title">Colours will go here</h1>
-          <ul>
-            <li>
-              <div>Colour name: </div>
-              <div>Colour hex: </div>
-              <div>Colour RGB: </div>
-              <div></div>
-            </li>
-          </ul>
-          <div>
-            <label htmlFor="new-colour-name">Name:</label><input type="text" name="new-colour-name" ref="newColourName" />
+          <h1 className="App-title">Colours</h1>
+
+          <div className="add-colour">
             <label htmlFor="new-colour-hex">Hex:</label><input type="text" name="new-colour-hex" ref="newColourHex" />
             <label htmlFor="new-colour-rgb">RGB:</label><input type="text" name="new-colour-rgb" ref="newColourRgb" />
-            <button value="Add" onClick={this.addColour}>Add</button>
+            <button value="Add" className="submit-btn" onClick={this.addColour}>Add</button>
           </div>
-          <div>Currently storing {this.state.colours.length} colours</div>
+          <ul>
+            {colours.map((col, i) => <Colour key={i} colour={col} />)}
+          </ul>
         </main>
       </div>
     );
