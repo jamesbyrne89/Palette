@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles/styles.css';
 import base from './db/base';
 import Colour from './components/Colour';
+import AddColour from './components/AddColour';
 
 class App extends Component {
   constructor() {
@@ -68,21 +69,16 @@ class App extends Component {
     const { colours } = this.state;
 
     return (
-      <div className="App">
-        <main className="colours">
-          <h1 className="App-title">Colours</h1>
-
-          <div className="add-colour">
-          <h2>Add a colour:</h2>
-            <label htmlFor="new-colour-hex">Hex:</label><input type="text" name="new-colour-hex" ref="newColourHex" />
-            <label htmlFor="new-colour-rgb">RGB:</label><input type="text" name="new-colour-rgb" ref="newColourRgb" />
-            <button value="Add" className="submit-btn" onClick={this.addColour}>Add</button>
-          </div>
-          <ul>
+      <main className="App">
+        <AddColour addColour={this.addColour} />
+        <div className="colours">
+        <h1 className="App-title">Colours</h1>
+          <div className="colour-list">
+          
             {colours.map((col, i) => <Colour key={i} colour={col} />)}
-          </ul>
-        </main>
-      </div>
+          </div>
+        </div>
+      </main>
     );
   }
 }

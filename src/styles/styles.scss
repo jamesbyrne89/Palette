@@ -10,7 +10,7 @@
 
 * {
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .App {
@@ -39,6 +39,7 @@
     font-size: 3rem;
     font-family: var(--headerFont);
     font-weight: 300;
+    margin-left: 2.5rem;
 }
 
 .App-intro {
@@ -91,10 +92,20 @@ ul {
     display: flex;
 }
 
+.colour-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
 .colour {
     margin: 2.5em 2.5em 0;
     text-align: left;
     background: var(--contentBackgroundColour);
+}
+
+.colours {
+    margin-left: 2.5rem;
 }
 
 .colour__swatch {
