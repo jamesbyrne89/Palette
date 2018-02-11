@@ -10,7 +10,6 @@ class App extends Component {
       colours: []
     }
     this.addColour = this.addColour.bind(this);
-    console.log(this.state)
   }
 
   componentWillMount() {
@@ -34,12 +33,16 @@ class App extends Component {
   // }
 
   addColour() {
-    const { newColourName, newColourHex, newColourRgb } = this.refs;
+    const { newColourHex, newColourRgb } = this.refs;
     const newColour = {};
     
-    newColour['name'] = newColourName.value;
-    newColour['hex'] = newColourHex.value;
-    newColour['rgb'] = newColourRgb.value;
+    newColour['hex'] = newColourHex.value || null;
+    newColour['rgb'] = newColourRgb.value || null;
+
+    if (!newColour['hex'] && !newColour['rgb']) {
+      this.handleInputErrors()
+      return;
+    }
 
     let newColourList = this.state.colours.concat(newColour);
     this.setState({
@@ -54,6 +57,12 @@ class App extends Component {
     })
   }
 
+  handleInputErrors() {
+  const { newColourHex, newColourRgb } = this.refs;
+    newColourHex.classList.add('invalid');
+    newColourRgb.classList.add('invalid');
+  }
+
   render() {
 
     const { colours } = this.state;
@@ -64,6 +73,7 @@ class App extends Component {
           <h1 className="App-title">Colours</h1>
 
           <div className="add-colour">
+          <h2>Add a colour:</h2>
             <label htmlFor="new-colour-hex">Hex:</label><input type="text" name="new-colour-hex" ref="newColourHex" />
             <label htmlFor="new-colour-rgb">RGB:</label><input type="text" name="new-colour-rgb" ref="newColourRgb" />
             <button value="Add" className="submit-btn" onClick={this.addColour}>Add</button>
