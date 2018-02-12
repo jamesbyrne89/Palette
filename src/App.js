@@ -4,6 +4,11 @@ import base from './db/base';
 import Colour from './components/Colour';
 import AddColour from './components/AddColour';
 
+
+const body = document.querySelector('body');
+
+body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'))
+
 class App extends Component {
   constructor() {
     super()
@@ -34,21 +39,21 @@ class App extends Component {
   // }
 
   addColour() {
-    const { newColourHex, newColourRgb } = this.refs;
-    const newColour = {};
+    // const { newColourInput } = this.refs;
+    // const newColour = {};
     
-    newColour['hex'] = newColourHex.value || null;
-    newColour['rgb'] = newColourRgb.value || null;
+    // newColour['hex'] = newColourHex.value || null;
+    // newColour['rgb'] = newColourRgb.value || null;
 
-    if (!newColour['hex'] && !newColour['rgb']) {
-      this.handleInputErrors()
-      return;
-    }
+    // if (!newColour['hex'] && !newColour['rgb']) {
+    //   this.handleInputErrors()
+    //   return;
+    // }
 
-    let newColourList = this.state.colours.concat(newColour);
-    this.setState({
-      colours: newColourList
-    })
+    // let newColourList = this.state.colours.concat(newColour);
+    // this.setState({
+    //   colours: newColourList
+    // })
   }
 
   removeColour(index) {
@@ -76,6 +81,9 @@ class App extends Component {
           <div className="colour-list">
           
             {colours.map((col, i) => <Colour key={i} colour={col} />)}
+            <button className="colour-add">
+            +
+          </button>
           </div>
         </div>
       </main>

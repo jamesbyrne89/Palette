@@ -65,11 +65,20 @@ input {
   margin-top: 1em;
 }
 
+input.valid {
+  border: solid 1.5px #82DDA9;
+}
+
 input.invalid {
   border: solid 1.5px #ff6644;
 }
 
+.add-colour-input {
+  display: inline-block;
+}
+
 .submit-btn {
+  display: inline-block;
   color: inherit;
   line-height: 1.5;
   font-size: 1rem;
@@ -78,6 +87,7 @@ input.invalid {
   background: transparent;
   border: solid 1.5px #fff;
   margin-top: 2.5em;
+  margin-left: 1em;
   cursor: pointer;
 }
 
@@ -118,7 +128,81 @@ ul {
   background: var(--contentBackgroundColour);
 }
 
+.colour__details {
+  padding: 0.5em 0;
+  text-transform: uppercase;
+}
+
 .colour__hex,
 .colour__rgb {
-  padding: 0.25em 0.5em;
+  padding: 0.2em 0.5em;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.mouse-enabled *:focus {
+  outline: none;
+}
+
+.preview {
+  -webkit-transition: opacity 0.5s ease-out, transform 0.3s ease-out;
+  -webkit-transition: opacity 0.5s ease-out, -webkit-transform 0.3s ease-out;
+  transition: opacity 0.5s ease-out, -webkit-transform 0.3s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.3s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  text-transform: uppercase;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.show {
+  -webkit-transform: translateY(20%);
+  transform: translateY(20%);
+  opacity: 1;
+}
+
+.preview__details {
+  padding: 1em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.preview__hex,
+.preview__rgb {
+  padding: 0.2em 0;
+}
+
+.colour-add {
+  opacity: 0;
+  margin: 2.5rem 2.5rem 0;
+  text-align: left;
+  width: 120px;
+  background: none;
+  border: dashed var(--contentBackgroundColour) 1.5px;
+  color: var(--contentBackgroundColour);
+  font-size: 5rem;
+  text-align: center;
+  height: 205px;
+  cursor: pointer;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+.colour-add:hover {
+  color: var(--textColour);
+  border: dashed 1.5px var(--textColour);
+}
+
+.colour-list:hover .colour-add {
+  opacity: 1;
 }
