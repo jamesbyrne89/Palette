@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './styles/styles.css';
 import base from './db/base';
 import Colour from './components/Colour';
-import AddColour from './components/AddColour';
+import AddColourInput from './components/AddColourInput';
 
 
 const body = document.querySelector('body');
@@ -13,7 +13,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      colours: []
+      colours: [],
+      newColour: {}
     }
     this.addColour = this.addColour.bind(this);
   }
@@ -34,26 +35,16 @@ class App extends Component {
     }))
   }
 
+
+
   // componentWillUnmount() {
   //   base.removeBinding(this.ref);
   // }
 
-  addColour() {
-    // const { newColourInput } = this.refs;
-    // const newColour = {};
-    
-    // newColour['hex'] = newColourHex.value || null;
-    // newColour['rgb'] = newColourRgb.value || null;
-
-    // if (!newColour['hex'] && !newColour['rgb']) {
-    //   this.handleInputErrors()
-    //   return;
-    // }
-
-    // let newColourList = this.state.colours.concat(newColour);
-    // this.setState({
-    //   colours: newColourList
-    // })
+  addColour(newColour) {
+    this.setState({
+      newColour: newColour
+    });
   }
 
   removeColour(index) {
@@ -75,7 +66,7 @@ class App extends Component {
 
     return (
       <main className="App">
-        <AddColour addColour={this.addColour} />
+        <AddColourInput addColour={this.addColour} />
         <div className="colours">
         <h1 className="App-title">Colours</h1>
           <div className="colour-list">
