@@ -28,13 +28,7 @@ class App extends Component {
         console.log("Failed!");
       }
     })
-    console.log(  base.syncState('colours', {
-      context: this,
-      state: 'colours',
-      asArray: true
-    }))
   }
-
 
 
   // componentWillUnmount() {
@@ -42,9 +36,14 @@ class App extends Component {
   // }
 
   addColour(newColour) {
-    this.setState({
-      newColour: newColour
-    });
+    if (newColour.hex && newColour.rgb) {
+    this.state.colours.filter((colour) => {
+      colour.rgb == newColour.rgb && colour.hex == newColour.hex
+    }).length > 0 ? console.error('Colour already exists!') : console.log('New colour will be added here');
+  }
+  this.setState({
+    newColour: newColour
+  });
   }
 
   removeColour(index) {
@@ -54,19 +53,14 @@ class App extends Component {
     })
   }
 
-  handleInputErrors() {
-  const { newColourHex, newColourRgb } = this.refs;
-    newColourHex.classList.add('invalid');
-    newColourRgb.classList.add('invalid');
-  }
 
   render() {
 
-    const { colours } = this.state;
+    const { colours, newColour } = this.state;
 
     return (
       <main className="App">
-        <AddColourInput addColour={this.addColour} />
+        <AddColourInput addColour={this.addColour} newColour={newColour} />
         <div className="colours">
         <h1 className="App-title">Colours</h1>
           <div className="colour-list">
