@@ -6,6 +6,9 @@ import AddColourInput from './components/AddColourInput';
 
 
 const body = document.querySelector('body');
+body.addEventListener('keyDown', function(e) {
+  console.log(e.keyCode)
+})
 
 body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'))
 

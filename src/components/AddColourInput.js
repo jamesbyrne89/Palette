@@ -9,6 +9,7 @@ class AddColourInput extends Component {
         super(props);
         this.addColour = this.props.addColour.bind(this);
         this.validateColour = this.validateColour.bind(this);
+        this.handleErrors = this.handleErrors.bind(this);
         this.isHex = this.isHex.bind(this);
         this.isRGB = this.isRGB.bind(this);
         this.hexToRgb = this.hexToRgb.bind(this);
@@ -33,20 +34,19 @@ class AddColourInput extends Component {
         const colour = {}
         const isHex = this.isHex(val);
         const isRGB = this.isRGB(val);
-        console.log(colour)
+
         if (isHex) {
             colour.hex = val;
-            colour.rgb = this.hexToRgb(val);
+            colour.rgb = this.hexToRgb(val, 'formatted');
         }
-
         else if (isRGB) {
             colour.hex = this.rgbToHex(val);
             colour.rgb = val;
         }
-
         if (colour.hex && colour.rgb) {
             this.addColour(colour)
             this.showPreview()
+            return true;
         }
         else {
             this.addColour(colour)
@@ -55,16 +55,14 @@ class AddColourInput extends Component {
     }
 
     showPreview() {
-        if (this.props.newColour) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.props.newColour ? true: false;
     }
 
-    handleErrors() {
-
+    handleErrors(input) {
+        console.log('handling errors', input)
+        if (!this.validateColour) {
+            alert('Sorry, that does not seem to be a valid colour')
+        }
     }
 
 
@@ -99,7 +97,7 @@ class AddColourInput extends Component {
         return (
             <div className="add-colour">
                 <h2>Add a colour:</h2>
-                <ColourInputBox validateColour={this.validateColour} />
+                <ColourInputBox validateColour={this.validateColour} handleErrors={this.handleErrors} />
                 <button className="submit-btn" onClick={this.addColour}>Add</button>
                 <div className={`preview${showPreview ? ' show' : ' invisible'}`}>
                     <div className="preview__block" style={{background: hex, height: '40px'}}></div>
