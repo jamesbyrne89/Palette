@@ -6,7 +6,7 @@ import AddColourInput from './components/AddColourInput';
 
 
 const body = document.querySelector('body');
-body.addEventListener('keyDown', function(e) {
+body.addEventListener('keyDown', function (e) {
   console.log(e.keyCode)
 })
 
@@ -17,8 +17,9 @@ class App extends Component {
     super()
     this.state = {
       colours: [],
-      newColour: {}
+      colourToAdd: null
     }
+    this.previewColour = this.previewColour.bind(this);
     this.addColour = this.addColour.bind(this);
   }
 
@@ -27,30 +28,35 @@ class App extends Component {
       context: this,
       state: 'colours',
       asArray: true,
-      onFailure: function(){
-        console.log("Failed!");
+      onFailure: function () {
+        console.error("Failed to sync state with Firebase");
       }
     })
   }
 
-
+  previewColour(newColour) {
+    this.setState({ colourToAdd: newColour })
+    console.log('set new colour to add');
+  }
   // componentWillUnmount() {
   //   base.removeBinding(this.ref);
   // }
 
   addColour(newColour) {
-    if (newColour.hex && newColour.rgb) {
-    this.state.colours.filter((colour) => {
-      colour.rgb == newColour.rgb && colour.hex == newColour.hex
-    }).length > 0 ? console.error('Colour already exists!') : console.log('New colour will be added here');
-  }
-  this.setState({
-    newColour: newColour
-  });
+
+    const alreadyExists = this.state.colours.filter(colour => colour.hex === newColour.hex || colour.rgb === newColour.rgb).length > 0;
+
+    if (alreadyExists) {
+      console.error('Colour already exists!')
+      alert('Colour already exists!')
+    }
+    else {
+      this.setState({ colours: this.state.colours.concat([newColour]) });
+    }
   }
 
   removeColour(index) {
-    let newColourList = this.state.colours.slice(index, index++);
+    let newColourList = this.state.colours.splice(index, index++);
     this.setState({
       colours: newColourList
     })
@@ -59,22 +65,26 @@ class App extends Component {
 
   render() {
 
-    const { colours, newColour } = this.state;
+    const { colours, colourToAdd } = this.state;
 
     return (
-      <main className="App">
-        <AddColourInput addColour={this.addColour} newColour={newColour} />
-        <div className="colours">
-        <h1 className="App-title">Colours</h1>
-          <div className="colour-list">
-          
-            {colours.map((col, i) => <Colour key={i} colour={col} />)}
-            <button className="colour-add">
-            +
+      <div className="app">
+        <main className="container">
+          <AddColourInput addColour={this.addColour} previewColour={this.previewColour} colourToAdd={this.state.colourToAdd} />
+
+          <div className="content-col">
+            <div className="colours">
+              <h1 className="app-title">Colours</h1>
+              <div className="colour-list">
+                {colours.map((col, i) => <Colour key={i} colour={col} />)}
+              </div>
+              <button className="colour-add">
+                +
           </button>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     );
   }
 }

@@ -7,13 +7,10 @@ import ColourInputBox from '../components/ColourInputBox';
 class AddColourInput extends Component {
     constructor(props) {
         super(props);
+
         this.addColour = this.props.addColour.bind(this);
         this.validateColour = this.validateColour.bind(this);
-        this.handleErrors = this.handleErrors.bind(this);
-        this.isHex = this.isHex.bind(this);
-        this.isRGB = this.isRGB.bind(this);
-        this.hexToRgb = this.hexToRgb.bind(this);
-        this.rgbToHex = this.rgbToHex.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     isHex(hex) {
@@ -23,53 +20,15 @@ class AddColourInput extends Component {
 
     isRGB(rgb) {
         const isRGBColour = /rgb\(([01][0-9]?[0-9]?|2[0-4][0-9]|25[0-5]),[\s]?(\d{1,3}),[\s]?(\d{1,3})\)/;
-        if (isRGBColour.test(rgb) || isRGBColour.test(rgb.replace(/[{()}]/g, ''))) {
+        if (isRGBColour.test(rgb)) {
             return isRGBColour;
         }
     }
 
-
-    validateColour(val) {
-        
-        const colour = {}
-        const isHex = this.isHex(val);
-        const isRGB = this.isRGB(val);
-
-        if (isHex) {
-            colour.hex = val;
-            colour.rgb = this.hexToRgb(val, 'formatted');
-        }
-        else if (isRGB) {
-            colour.hex = this.rgbToHex(val);
-            colour.rgb = val;
-        }
-        if (colour.hex && colour.rgb) {
-            this.addColour(colour)
-            this.showPreview()
-            return true;
-        }
-        else {
-            this.addColour(colour)
-            return false;
-        }
-    }
-
-    showPreview() {
-        return this.props.newColour ? true: false;
-    }
-
-    handleErrors(input) {
-        console.log('handling errors', input)
-        if (!this.validateColour) {
-            alert('Sorry, that does not seem to be a valid colour')
-        }
-    }
-
-
     hexToRgb(hex, format) {
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         if (result) {
-            if (format === 'formatted') {
+            if (format === true) {
                 return `${parseInt(result[1], 16).toString()}, ${parseInt(result[2], 16).toString()}, ${parseInt(result[3], 16).toString()}`;
             }
             else {
@@ -89,18 +48,69 @@ class AddColourInput extends Component {
             ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
             ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
     }
+    
+    validateColour(val) {
+        const colour = {}
+        const isHex = this.isHex(val);
+        const isRGB = this.isRGB(val);
+
+        if (isHex) {
+            colour.hex = val;
+            colour.rgb = this.hexToRgb(val, true);
+        }
+        else if (isRGB) {
+            colour.hex = this.rgbToHex(val);
+            colour.rgb = val;
+        }
+        // Valid colour
+        if (colour.hex && colour.rgb) {
+            this.previewColour(colour)
+        }
+        else {
+            console.log('invalid colour')
+            return null;
+        }
+    }
+
+    previewColour(colour) {
+        this.props.previewColour(colour)
+    }
+    
+
+    handleKeyPress(e) {
+        const validColour = this.validateColour(e.target.value);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            if (validColour) {           
+                this.addColour(validColour)
+            }
+            else {
+                this.handleErrors();
+            }
+        }
+    }
+
+
+    handleErrors(input) {
+        if (!this.validateColour(input)) {
+            alert('Sorry, that does not seem to be a valid colour')
+        }
+    }
+
 
     render() {
-        const { hex, rgb } = this.props.newColour;
-        const showPreview = this.showPreview();
-        console.log(this.showPreview())
+
+        const colourToAdd = this.props.colourToAdd ? this.props.colourToAdd : null;
+        const showPreview = this.props.colourToAdd ? true : false;
+        const hex = this.props.colourToAdd ? this.props.colourToAdd.hex : null;
+        const rgb = this.props.colourToAdd ? this.props.colourToAdd.rgb : null;
         return (
             <div className="add-colour">
                 <h2>Add a colour:</h2>
-                <ColourInputBox validateColour={this.validateColour} handleErrors={this.handleErrors} />
+                <ColourInputBox validateColour={this.validateColour} handleKeyPress={this.handleKeyPress} />
                 <button className="submit-btn" onClick={this.addColour}>Add</button>
-                <div className={`preview${showPreview ? ' show' : ' invisible'}`}>
-                    <div className="preview__block" style={{background: hex, height: '40px'}}></div>
+                <div className={`preview ${showPreview ? 'show' : ''}`} >
+                    <div className="preview__block" style={{ background: hex, height: '40px' }}></div>
                     <div className="preview__details">
                         <div className="preview__hex">{hex}</div>
                         <div className="preview__rgb">{rgb}</div>

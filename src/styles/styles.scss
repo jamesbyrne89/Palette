@@ -13,9 +13,11 @@
     box-sizing: border-box;
 }
 
-.App {
+.app {
     min-height: 100vh;
     background: linear-gradient( -45deg, var(--backgroundColour) 0%, var(--backgroundColour) 50%, var(--backgroundColourSecondary) 50%, var(--backgroundColourSecondary) 100%);
+    color: var(--textColour);
+    font-family: var(--bodyFont);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -25,11 +27,17 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    color: var(--textColour);
-    font-family: var(--bodyFont);
 }
 
-.App-logo {
+.container {
+    display: grid;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.app-logo {
     -webkit-animation: App-logo-spin infinite 20s linear;
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
@@ -103,13 +111,13 @@ ul {
 }
 
 .colour-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 150px));
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
 }
 
 .colour {
-    margin: 2.5em 2.5em 0;
     text-align: left;
     background: var(--contentBackgroundColour);
 }
@@ -119,13 +127,12 @@ ul {
 }
 
 .colour__swatch {
-    height: 130px;
-    width: 120px;
+    height: 140px;
     margin-bottom: 0.5em;
 }
 
 .add-colour {
-    padding: 1.5em;
+    padding: 0 1.5em;
     background: var(--contentBackgroundColour);
 }
 
