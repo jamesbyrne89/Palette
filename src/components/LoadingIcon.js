@@ -5,9 +5,9 @@ const LoadingIcon = (props) => {
 
     return (
         <div className="loader">
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
+            <div className="loader__dot"></div>
+            <div className="loader__dot"></div>
+            <div className="loader__dot"></div>
         </div>
     );
 }

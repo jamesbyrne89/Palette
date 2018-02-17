@@ -20,6 +20,7 @@ class App extends Component {
       loading: true
     }
     this.addColour = this.addColour.bind(this);
+    this.handleLoading = this.handleLoading.bind(this);
   }
 
   componentWillMount() {
@@ -28,7 +29,7 @@ class App extends Component {
       state: 'colours',
       asArray: true,
       then: function () {
-        this.setState({ loading: false })
+        // this.setState({ loading: false })
         console.info("Syncing with Firebase");
       },
       onFailure: function () {
@@ -82,13 +83,13 @@ class App extends Component {
       <div className="app">
       <Header />
         <main className="container">
+        <div class="col">
           <AddColourInput addColour={this.addColour} previewColour={this.previewColour} colourToAdd={colourToAdd} />
-
+    </div>
           <div className="content-col">
             <div className="colours">
               <h1 className="app-title">Colours</h1>
-              <ColourList colours={colours} />
-              {this.handleLoading()}
+              <ColourList colours={colours} handleLoading={this.handleLoading} />
               <button className="colour-add">
                 +
           </button>

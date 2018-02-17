@@ -13,6 +13,20 @@
     box-sizing: border-box;
 }
 
+
+/* Columns */
+
+.col {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .app {
     min-height: 100vh;
     background: linear-gradient( -45deg, var(--backgroundColour) 0%, var(--backgroundColour) 50%, var(--backgroundColourSecondary) 50%, var(--backgroundColourSecondary) 100%);
@@ -31,10 +45,8 @@
 
 .container {
     display: grid;
-    width: 80%;
-    height: 80%;
-    margin: auto;
-    grid-template-columns: minMax(300px, 20%) minMax(900px, 1000px) minMax(0px, 20%);
+    margin: 200px auto;
+    grid-template-columns: auto minMax(600px, 1000px) auto;
 }
 
 .app-logo {
@@ -43,15 +55,11 @@
     height: 80px;
 }
 
-.App-title {
+.app-title {
     font-size: 3rem;
     font-family: var(--headerFont);
     font-weight: 300;
     margin-left: 2.5rem;
-}
-
-.App-intro {
-    font-size: large;
 }
 
 label {
@@ -82,10 +90,6 @@ input.invalid {
     border: solid 1.5px rgb(255, 102, 68);
 }
 
-.add-colour-input {
-    display: inline-block;
-}
-
 .submit-btn {
     display: inline-block;
     color: var(--contentBackgroundColour);
@@ -96,7 +100,6 @@ input.invalid {
     background: #fff;
     border: solid 1.5px #fff;
     margin-top: 2.5em;
-    margin-left: 1em;
     cursor: pointer;
     font-weight: bold;
 }
@@ -137,9 +140,14 @@ ul {
 }
 
 .add-colour {
-    padding: 0 1.5em;
+    padding: 1.5em;
     background: var(--contentBackgroundColour);
     width: 300px;
+    margin-top: 80px;
+}
+
+.add-colour-input {
+    display: inline-block;
 }
 
 .colour__details {
@@ -222,15 +230,14 @@ ul {
 
 .loader {
     position: absolute;
-    top: 0;
+    top: 1em;
     left: 0;
     right: 0;
-    bottom: 0;
     margin: auto;
     width: 75px;
     height: 16px;
     text-align: center;
-    .dot {
+    &__dot {
         width: 12px;
         height: 12px;
         background: #fff;
