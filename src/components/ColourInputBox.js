@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/styles.css';
 
 const ColourInputBox = (props) => {
-    const validateInput = (e) => {
-        props.validateColour(e.target.value)
-    }
 
     const handleKeyPress = (e) => {
         props.handleKeyPress(e);

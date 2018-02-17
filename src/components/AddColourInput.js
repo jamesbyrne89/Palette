@@ -11,6 +11,10 @@ class AddColourInput extends Component {
         this.addColour = this.props.addColour.bind(this);
         this.validateColour = this.validateColour.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
+
+        this.state = {
+            colourToAdd: null
+        }
     }
 
     isHex(hex) {
@@ -72,8 +76,13 @@ class AddColourInput extends Component {
         }
     }
 
-    previewColour(colour) {
-        this.props.previewColour(colour)
+    previewColour(newColour) {
+        this.setState({ colourToAdd: newColour })
+        console.log('set new colour to add');
+      }
+
+    submitColourHandler(newColour) {
+        this.props.submitColour(newColour)
     }
     
 
@@ -100,16 +109,15 @@ class AddColourInput extends Component {
 
     render() {
 
-        const colourToAdd = this.props.colourToAdd ? this.props.colourToAdd : null;
-        const showPreview = this.props.colourToAdd ? true : false;
-        const hex = this.props.colourToAdd ? this.props.colourToAdd.hex : null;
-        const rgb = this.props.colourToAdd ? this.props.colourToAdd.rgb : null;
+        const showPreview = this.state.colourToAdd ? true : false;
+        const hex = this.state.colourToAdd ? this.state.colourToAdd.hex : null;
+        const rgb = this.state.colourToAdd ? this.state.colourToAdd.rgb : null;
         return (
             <div className="add-colour">
                 <h2>Add a colour:</h2>
                 <ColourInputBox validateColour={this.validateColour} handleKeyPress={this.handleKeyPress} />
                 <button className="submit-btn" onClick={this.addColour}>Add</button>
-                <div className={`preview ${showPreview ? 'show' : ''}`} >
+                <div className={`preview${showPreview ? ' show' : ''}`} >
                     <div className="preview__block" style={{ background: hex, height: '40px' }}></div>
                     <div className="preview__details">
                         <div className="preview__hex">{hex}</div>

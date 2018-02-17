@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import './styles/styles.css';
 import base from './db/base';
-import Colour from './components/Colour';
+import Header from './components/Header';
+import LoadingIcon from './components/LoadingIcon';
+import ColourList from './components/ColourList';
 import AddColourInput from './components/AddColourInput';
 
 
 const body = document.querySelector('body');
-body.addEventListener('keyDown', function (e) {
-  console.log(e.keyCode)
-})
 
 body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'))
+
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       colours: [],
-      colourToAdd: null
+      loading: true
     }
-    this.previewColour = this.previewColour.bind(this);
     this.addColour = this.addColour.bind(this);
   }
 
@@ -28,19 +27,31 @@ class App extends Component {
       context: this,
       state: 'colours',
       asArray: true,
+      then: function () {
+        this.setState({ loading: false })
+        console.info("Syncing with Firebase");
+      },
       onFailure: function () {
         console.error("Failed to sync state with Firebase");
       }
     })
   }
 
-  previewColour(newColour) {
-    this.setState({ colourToAdd: newColour })
-    console.log('set new colour to add');
-  }
+
   // componentWillUnmount() {
   //   base.removeBinding(this.ref);
   // }
+
+  handleLoading() {
+    if (this.state.loading) {
+      return (
+        <LoadingIcon />
+      )
+    }
+    else {
+      return null;
+    }
+  }
 
   addColour(newColour) {
 
@@ -69,15 +80,15 @@ class App extends Component {
 
     return (
       <div className="app">
+      <Header />
         <main className="container">
-          <AddColourInput addColour={this.addColour} previewColour={this.previewColour} colourToAdd={this.state.colourToAdd} />
+          <AddColourInput addColour={this.addColour} previewColour={this.previewColour} colourToAdd={colourToAdd} />
 
           <div className="content-col">
             <div className="colours">
               <h1 className="app-title">Colours</h1>
-              <div className="colour-list">
-                {colours.map((col, i) => <Colour key={i} colour={col} />)}
-              </div>
+              <ColourList colours={colours} />
+              {this.handleLoading()}
               <button className="colour-add">
                 +
           </button>
