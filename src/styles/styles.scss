@@ -41,25 +41,29 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 .container {
     display: grid;
-    margin: 200px auto;
+    margin: 100px auto;
     grid-template-columns: auto minMax(600px, 1000px) auto;
 }
 
-.app-logo {
-    -webkit-animation: App-logo-spin infinite 20s linear;
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
+.header {
+    height: 60px;
+    width: 100%;
+    background: var(--contentBackgroundColour);
 }
 
 .app-title {
     font-size: 3rem;
     font-family: var(--headerFont);
     font-weight: 300;
-    margin-left: 2.5rem;
+    margin-left: 0;
 }
 
 label {
@@ -79,6 +83,7 @@ input {
     color: var(--textColourSecondary);
     font-weight: 300;
     margin-top: 1em;
+    width: 100%;
     ;
 }
 
@@ -90,18 +95,43 @@ input.invalid {
     border: solid 1.5px rgb(255, 102, 68);
 }
 
-.submit-btn {
+.btn {
     display: inline-block;
     color: var(--contentBackgroundColour);
     line-height: 1.5;
     font-size: 1rem;
     padding: 0.5em 1em 0.4em;
-    border-radius: 5px;
     background: #fff;
     border: solid 1.5px #fff;
-    margin-top: 2.5em;
     cursor: pointer;
     font-weight: bold;
+}
+
+.submit-btn {
+    margin-top: 0.5em;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: -5px;
+    border-radius: 2px;
+    right: -10px;
+    padding: 0 0.5em;
+    background: #fff;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: opacity 0.15s;
+    -webkit-transition: opacity 0.15s;
+    transition: opacity 0.15s;
+    -webkit-box-shadow: 0 2px 6px var(--backgroundColour), 0 1px 3px var(--backgroundColour);
+    box-shadow: 0 2px 6px var(--backgroundColour), 0 1px 3px var(--backgroundColour)
+}
+
+.colour:hover .delete-btn {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 h2 {
@@ -119,6 +149,7 @@ ul {
     grid-template-columns: repeat(4, minmax(120px, 150px));
     grid-column-gap: 2.5em;
     grid-row-gap: 2.5em;
+    position: relative;
 }
 
 .content-col {
@@ -126,6 +157,7 @@ ul {
 }
 
 .colour {
+    position: relative;
     text-align: left;
     background: var(--contentBackgroundColour);
 }
@@ -143,7 +175,7 @@ ul {
     padding: 1.5em;
     background: var(--contentBackgroundColour);
     width: 300px;
-    margin-top: 80px;
+    margin-top: 120px;
 }
 
 .add-colour-input {
@@ -153,19 +185,23 @@ ul {
 .colour__details {
     padding: 0.5em 0;
     text-transform: uppercase;
+    position: relative;
 }
 
 .colour__hex,
 .colour__rgb {
     padding: 0.2em 0.5em;
-}
-
-.hidden {
-    display: none;
+    position: relative;
 }
 
 .invisible {
     opacity: 0;
+    -webkit-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+}
+
+.hidden {
+    display: none;
 }
 
 .mouse-enabled *:focus {
@@ -181,12 +217,15 @@ ul {
     text-transform: uppercase;
     -webkit-transform: translateY(0);
     transform: translateY(0);
+    margin-top: 1em;
 }
 
 .show {
-    -webkit-transform: translateY(20%);
-    transform: translateY(20%);
+    // -webkit-transform: translateY(20%);
+    // transform: translateY(20%);
     opacity: 1;
+    -webkit-transform: rotateX(0);
+    transform: rotateX(0);
 }
 
 .preview__details {
@@ -206,9 +245,8 @@ ul {
 
 .colour-add {
     opacity: 0;
-    margin: 2.5rem 2.5rem 0;
     text-align: left;
-    width: 120px;
+    width: 100%;
     background: none;
     border: dashed var(--contentBackgroundColour) 1.5px;
     color: var(--contentBackgroundColour);

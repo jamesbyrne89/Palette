@@ -1,14 +1,30 @@
 import React from 'react';
 import '../styles/styles.css';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Colour = (props) => {
-    const { colour } = props;
+
+    const { colour, removeColour, index } = props;
+
+    const handleRemoveColour = (index) => {
+        removeColour(index)
+    }
+
+
+
     return (
         <div className="colour">
-            <div className="colour__swatch" style={{background: colour.hex}}></div>
+            <button className="btn delete-btn" onClick={() => handleRemoveColour(index)} >X</button>
+            <div className="colour__swatch" style={{ background: colour.hex }}></div>
             <div className="colour__details">
-                <div className="colour__hex">{colour.hex}</div>
-                <div className="colour__rgb">{colour.rgb}</div>
+                <CopyToClipboard text={colour.hex}
+                    onCopy={() => console.log('copied')}>
+                    <div className="colour__hex" >{colour.hex}</div>
+                </CopyToClipboard>
+                <CopyToClipboard text={colour.hex}
+                    onCopy={() => console.log('copied')}>
+                    <div className="colour__rgb" >{colour.rgb}</div>
+                </CopyToClipboard>
             </div>
         </div>
     );
