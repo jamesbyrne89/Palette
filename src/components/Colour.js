@@ -19,11 +19,15 @@ const Colour = (props) => {
             <div className="colour__details">
                 <CopyToClipboard text={colour.hex}
                     onCopy={() => console.log('copied')}>
-                    <div className="colour__hex" >{colour.hex}</div>
+                    <div className="colour__hex" >{colour.hex}
+                    <div className="colour__hex--hover" ><span>Copy Hex</span></div>
+                    </div>
                 </CopyToClipboard>
                 <CopyToClipboard text={colour.hex}
                     onCopy={() => console.log('copied')}>
-                    <div className="colour__rgb" >{colour.rgb}</div>
+                    <div className="colour__rgb" >{colour.rgb}
+                    <div className="colour__rgb--hover" ><span>Copy RGB</span></div>
+                    </div>
                 </CopyToClipboard>
             </div>
         </div>

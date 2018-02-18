@@ -8,7 +8,7 @@ const ColourList = (props) => {
         <div className="colour-list">
         {props.handleLoading()}
         {props.colours.map((col, i) => <Colour key={i} index={i} colour={col} removeColour={props.removeColour} />)}
-        <button className="colour-add">+</button>
+        {/* <button className="colour-add">+</button> */}
       </div>
     );
 }

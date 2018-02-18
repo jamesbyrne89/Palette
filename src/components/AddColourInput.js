@@ -120,7 +120,7 @@ class AddColourInput extends Component {
         const rgb = this.state.colourToAdd ? this.state.colourToAdd.rgb : null;
 
         return (
-            <div className="add-colour">
+            <div className={`add-colour${showPreview ? ' expanded' : ''}`}>
                 <h2>Add a colour:</h2>
                 <ColourInputBox validateColour={this.validateColour} handleKeyPress={this.handleKeyPress} />
                 <div className={`preview${showPreview ? ' show' : ' invisible'}`} >
