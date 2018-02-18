@@ -1,6 +1,66 @@
 import React from 'react';
 import '../styles/styles.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import styled from 'styled-components';
+
+
+const ColourStyles = styled.div `
+position: relative;
+text-align: left;
+background: var(--contentBackgroundColour);
+` 
+
+const ColourSwatch = styled.div `
+height: 140px;
+background: ${props => {
+    console.log(props)
+    return props.hex}
+}
+`
+
+const ColourDetails = styled.div `
+padding: 0.25em 0;
+text-transform: uppercase;
+position: relative;
+`
+
+const ColourDetailsHoverOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0.55em 0.5em 0.45em;
+    color: var(--contentBackgroundColour);
+    background: #fff;
+    -webkit-transition: opacity 0.225s;
+    transition: opacity 0.225s;
+    font-weight: 700;
+`
+
+const ColourHex = styled.div `
+padding: 0.55em 0.5em 0.45em;
+position: relative;
+background: var(--contentBackgroundColour);
+cursor: pointer;
+overflow: hidden;
+&:hover ${ColourDetailsHoverOverlay} {
+    opacity: 1;
+}
+`
+const ColourRgb = styled.div `
+padding: 0.55em 0.5em 0.45em;
+position: relative;
+background: var(--contentBackgroundColour);
+cursor: pointer;
+overflow: hidden;
+    &:hover ${ColourDetailsHoverOverlay} {
+        opacity: 1;
+    }
+`
+
+
 
 const Colour = (props) => {
 
@@ -11,26 +71,25 @@ const Colour = (props) => {
     }
 
 
-
     return (
-        <div className="colour">
+        <ColourStyles>
             <button className="btn delete-btn" onClick={() => handleRemoveColour(index)} >X</button>
-            <div className="colour__swatch" style={{ background: colour.hex }}></div>
-            <div className="colour__details">
+            <ColourSwatch style={{background: colour.hex}}></ColourSwatch>
+            <ColourDetails>
                 <CopyToClipboard text={colour.hex}
                     onCopy={() => console.log('copied')}>
-                    <div className="colour__hex" >{colour.hex}
-                    <div className="colour__hex--hover" ><span>Copy Hex</span></div>
-                    </div>
+                    <ColourHex>{colour.hex}
+                    <ColourDetailsHoverOverlay><span>Copy Hex</span></ColourDetailsHoverOverlay>
+                    </ColourHex>
                 </CopyToClipboard>
                 <CopyToClipboard text={colour.hex}
                     onCopy={() => console.log('copied')}>
-                    <div className="colour__rgb" >{colour.rgb}
-                    <div className="colour__rgb--hover" ><span>Copy RGB</span></div>
-                    </div>
+                    <ColourRgb>{colour.rgb}
+                    <ColourDetailsHoverOverlay><span>Copy RGB</span></ColourDetailsHoverOverlay>
+                    </ColourRgb>
                 </CopyToClipboard>
-            </div>
-        </div>
+            </ColourDetails>
+        </ColourStyles>
     );
 }
 

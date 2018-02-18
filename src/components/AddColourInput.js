@@ -1,8 +1,60 @@
 import React, { Component } from 'react';
 import '../styles/styles.css';
 import ColourInputBox from '../components/ColourInputBox';
+import styled from 'styled-components';
 
+const dropDownAnimation = () => {
+   `
+        0% {
+            max-height: 200px;
+        }
+        60% {
+            max-height: 350px;
+        }
+        100% {
+            max-height: 320px;
+        }
+    `};
 
+const AddColourContainer = styled.div`
+padding: 1.5em;
+background: var(--contentBackgroundColour);
+width: 300px;
+overflow: hidden;
+margin-top: 120px;
+-webkit-transition: all 0.225s ease-in-out;
+transition: all 0.225s ease-in-out;
+${props => props.expanded ? `max-height: 330px;
+animation: ${dropDownAnimation} 0.225s ease-out;` : `max-height: 200px;`}
+
+h2 {
+    margin: 0;
+}
+`
+
+const PreviewStyles = styled.div`
+${props => props.visible ? `opacity: 1;
+-webkit-transition: opacity 0.15s ease-out;
+transition: opacity 0.15s ease-out;
+height: auto;` : `opacity: 0;
+height: 0; overflow: hidden;`}
+`
+
+const PreviewDetails = styled.div`
+padding: 1em 0;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: justify;
+-ms-flex-pack: justify;
+justify-content: space-between;
+padding: 0.2em 0;
+`
+
+const PreviewBlock = styled.div`
+${props => console.log(props)}
+margin-top: 2.5em;
+`
 
 class AddColourInput extends Component {
     constructor(props) {
@@ -28,7 +80,7 @@ class AddColourInput extends Component {
         const isRGBColour = /rgb\(([01][0-9]?[0-9]?|2[0-4][0-9]|25[0-5]),[\s]?(\d{1,3}),[\s]?(\d{1,3})\)/;
         console.log('rgb', isRGBColour.test(rgb))
         if (isRGBColour.test(rgb)) {
-            
+
             return isRGBColour;
         }
     }
@@ -56,7 +108,7 @@ class AddColourInput extends Component {
             ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
             ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
     }
-    
+
     validateColour(val) {
         const colour = {}
         const isHex = this.isHex(val);
@@ -83,20 +135,20 @@ class AddColourInput extends Component {
 
     previewColour(newColour) {
         this.setState({ colourToAdd: newColour })
-      }
+    }
 
-      handleAddColour() {
-          this.props.addColour(this.state.colourToAdd);
-          this.setState({ colourToAdd: null })
-      }
-    
+    handleAddColour() {
+        this.props.addColour(this.state.colourToAdd);
+        this.setState({ colourToAdd: null })
+    }
+
 
     handleKeyPress(e) {
         this.validateColour(e.target.value);
         const validColour = this.state.colourToAdd
         if (e.keyCode === 13) {
             e.preventDefault();
-            if (validColour) {          
+            if (validColour) {
                 this.handleAddColour(validColour)
             }
             else {
@@ -120,18 +172,18 @@ class AddColourInput extends Component {
         const rgb = this.state.colourToAdd ? this.state.colourToAdd.rgb : null;
 
         return (
-            <div className={`add-colour${showPreview ? ' expanded' : ''}`}>
+            <AddColourContainer hex={hex} expanded={showPreview}>
                 <h2>Add a colour:</h2>
-                <ColourInputBox validateColour={this.validateColour} handleKeyPress={this.handleKeyPress} />
-                <div className={`preview${showPreview ? ' show' : ' invisible'}`} >
-                    <div className="preview__block" style={{ background: hex, height: '40px' }}></div>
-                    <div className="preview__details">
+                <ColourInputBox validateColour={this.validateColour} handleKeyPress={this.handleKeyPress} hex={hex} />
+                <PreviewStyles visible={showPreview} >
+                    <PreviewBlock hex={hex} />
+                    <PreviewDetails>
                         <div className="preview__hex">{hex}</div>
                         <div className="preview__rgb">{rgb}</div>
-                    </div>
+                    </PreviewDetails>
                     <button className="btn submit-btn" onClick={this.handleAddColour}>Add</button>
-                </div>
-            </div>
+                </PreviewStyles>
+            </AddColourContainer>
         );
     }
 }
