@@ -13,10 +13,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "firebase": "^4.9.1",
     "re-base": "^3.2.2"
-  }
+  },
+  "homepage": "http://jamesbyrne89.github.io/Palette"
 }
