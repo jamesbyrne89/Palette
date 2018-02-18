@@ -4,10 +4,33 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 
 
+const DeleteButton = styled.button`
+position: absolute;
+top: -5px;
+border-radius: 2px;
+right: -10px;
+padding: 0 0.5em;
+background: #fff;
+border: 0;
+opacity: 0;
+font-weight: bold;
+pointer-events: none;
+-webkit-transition: opacity 0.15s;
+-webkit-transition: opacity 0.15s;
+transition: opacity 0.15s;
+-webkit-box-shadow: 0 2px 6px var(--backgroundColour), 0 1px 3px var(--backgroundColour);
+box-shadow: 0 2px 6px var(--backgroundColour), 0 1px 3px var(--backgroundColour);
+cursor: pointer;
+`
+
 const ColourStyles = styled.div `
 position: relative;
 text-align: left;
 background: var(--contentBackgroundColour);
+&:hover ${DeleteButton} {
+    opacity: 1;
+    pointer-events: auto;
+}
 ` 
 
 const ColourSwatch = styled.div `
@@ -62,6 +85,7 @@ overflow: hidden;
 
 
 
+
 const Colour = (props) => {
 
     const { colour, removeColour, index } = props;
@@ -73,7 +97,7 @@ const Colour = (props) => {
 
     return (
         <ColourStyles>
-            <button className="btn delete-btn" onClick={() => handleRemoveColour(index)} >X</button>
+            <DeleteButton onClick={() => handleRemoveColour(index)} >X</DeleteButton>
             <ColourSwatch style={{background: colour.hex}}></ColourSwatch>
             <ColourDetails>
                 <CopyToClipboard text={colour.hex}

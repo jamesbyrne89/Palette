@@ -41,19 +41,19 @@ height: 0; overflow: hidden;`}
 `
 
 const PreviewDetails = styled.div`
-padding: 1em 0;
 display: -webkit-box;
 display: -ms-flexbox;
 display: flex;
 -webkit-box-pack: justify;
 -ms-flex-pack: justify;
 justify-content: space-between;
-padding: 0.2em 0;
+padding: 1em 0;
 `
 
 const PreviewBlock = styled.div`
 ${props => console.log(props)}
 margin-top: 2.5em;
+height: 2em;
 `
 
 class AddColourInput extends Component {
@@ -115,11 +115,11 @@ class AddColourInput extends Component {
         const isRGB = this.isRGB(val);
 
         if (isHex) {
-            colour.hex = val;
+            colour.hex = val.toUpperCase();
             colour.rgb = this.hexToRgb(val, true);
         }
         else if (isRGB) {
-            colour.hex = this.rgbToHex(val);
+            colour.hex = this.rgbToHex(val).toUpperCase();
             colour.rgb = val;
         }
         // Valid colour
@@ -176,7 +176,7 @@ class AddColourInput extends Component {
                 <h2>Add a colour:</h2>
                 <ColourInputBox validateColour={this.validateColour} handleKeyPress={this.handleKeyPress} hex={hex} />
                 <PreviewStyles visible={showPreview} >
-                    <PreviewBlock hex={hex} />
+                    <PreviewBlock hex={hex} style={{background: hex}} />
                     <PreviewDetails>
                         <div className="preview__hex">{hex}</div>
                         <div className="preview__rgb">{rgb}</div>
