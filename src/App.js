@@ -69,9 +69,9 @@ class App extends Component {
   }
 
   removeColour(index) {
-    console.log('Removing', this.state.colours.splice(index, index+1))
+    
     let newColourList = this.state.colours;
-    this.state.colours.splice(index, index+1);
+    this.state.colours.splice(index, 1);
     
     this.setState({
       colours: newColourList
