@@ -48,6 +48,17 @@ const ColumnMain = styled.div `
 position: relative;
 `
 
+const Column  = styled.div `
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-ms-flex-direction: column;
+flex-direction: column;
+height: calc(100vh - 200px);
+`
+
 
 class App extends Component {
   constructor() {
@@ -124,9 +135,9 @@ class App extends Component {
       <AppStyles>
       <Header />
         <Container>
-        <div className="col">
+        <Column>
           <AddColourInput addColour={this.addColour} previewColour={this.previewColour} colourToAdd={colourToAdd} />
-    </div>
+    </Column>
           <ColumnMain>
             <div className="colours">
               <Title>Colours</Title>

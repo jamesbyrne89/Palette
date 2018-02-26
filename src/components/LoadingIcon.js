@@ -13,7 +13,7 @@ height: 16px;
 text-align: center;
 `
 
-const loaderDot = styled.div `
+const LoaderDot = styled.div `
 width: 12px;
 height: 12px;
 background: #fff;
@@ -62,9 +62,9 @@ const LoadingIcon = (props) => {
 
     return (
         <Loader>
-            <div className="loader__dot"></div>
-            <div className="loader__dot"></div>
-            <div className="loader__dot"></div>
+            <LoaderDot />
+            <LoaderDot />
+            <LoaderDot />
        </Loader>
     );
 }
