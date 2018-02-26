@@ -23,7 +23,13 @@ const ColourInputBox = (props) => {
     }
 
     return (
-        <InputStyles className="add-colour-input" type="text" maxLength="12" placeholder="Enter a hex or RGB code" onKeyUp={handleKeyPress} onChange={props.validateColour} />
+        <InputStyles className="add-colour-input"
+        type="text"
+        maxLength="12"
+        placeholder="Enter a hex or RGB code"
+        onKeyUp={handleKeyPress}
+        onChange={props.validateColour}
+        autofocus />
     );
 }
 
