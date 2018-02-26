@@ -51,7 +51,6 @@ padding: 1em 0;
 `
 
 const PreviewBlock = styled.div`
-${props => console.log(props)}
 margin-top: 2.5em;
 height: 2em;
 `
@@ -76,11 +75,8 @@ class AddColourInput extends Component {
     }
 
     isRGB(rgb) {
-        console.log('rgb', rgb)
         const isRGBColour = /rgb\(([01][0-9]?[0-9]?|2[0-4][0-9]|25[0-5]),[\s]?(\d{1,3}),[\s]?(\d{1,3})\)/;
-        console.log('rgb', isRGBColour.test(rgb))
         if (isRGBColour.test(rgb)) {
-
             return isRGBColour;
         }
     }
