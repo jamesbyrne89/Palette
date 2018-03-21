@@ -36,6 +36,7 @@ const Container = styled.main `
 display: grid;
 margin: 100px auto;
 grid-template-columns: auto minMax(600px, 1000px) auto;
+grid-template-areas: "add-colour-sidebar main-column gutter"
 `
 const Title = styled.h1 `
 font-size: 3rem;
