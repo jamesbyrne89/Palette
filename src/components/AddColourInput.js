@@ -119,6 +119,7 @@ class AddColourInput extends Component {
             colour.rgb = val;
         }
         // Valid colour
+        colour.key = this.props.colours.length;
         if (colour.hex && colour.rgb) {
             this.previewColour(colour)
         }

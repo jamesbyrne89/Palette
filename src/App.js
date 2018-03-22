@@ -113,7 +113,8 @@ class App extends Component {
       alert('Colour already exists!')
     }
     else {
-      this.setState({ colours: this.state.colours.concat([newColour]) });
+      console.log(newColour)
+     this.setState({ colours: this.state.colours.concat([newColour]) });
     }
   }
 
