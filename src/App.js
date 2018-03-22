@@ -137,7 +137,7 @@ class App extends Component {
       <Header />
         <Container>
         <Column>
-          <AddColourInput addColour={this.addColour} previewColour={this.previewColour} colourToAdd={colourToAdd} />
+          <AddColourInput colours={colours} addColour={this.addColour} previewColour={this.previewColour} colourToAdd={colourToAdd} />
     </Column>
           <ColumnMain>
             <div className="colours">

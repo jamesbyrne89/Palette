@@ -11,6 +11,7 @@ class AddColour extends Component {
             colour: {
                 isValid: false,
                 hex: null,
+                key: null,
                 rgb: null
             }
         }
@@ -48,6 +49,7 @@ class AddColour extends Component {
                     colour: {
                         isValid: true,
                         hex: value,
+                        key: this.props.colours.length,
                         rgb: this.hexToRgb(value, 'formatted')
                     }
                 })
