@@ -72,6 +72,18 @@ ul {
   margin-left: 2.5rem;
 }
 
+@media (max-width: 1024px) {
+  .colours {
+    margin-left: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .colours {
+    margin-left: 0;
+  }
+}
+
 .invisible {
   opacity: 0;
   -webkit-transform: rotateX(-90deg);

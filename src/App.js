@@ -10,7 +10,9 @@ import styled from 'styled-components';
 
 const body = document.querySelector('body');
 
-body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'))
+body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'));
+
+
 
 const AppStyles = styled.div `
 min-height: 100vh;
@@ -36,7 +38,22 @@ const Container = styled.main `
 display: grid;
 margin: 100px auto;
 grid-template-columns: auto minMax(600px, 1000px) auto;
-grid-template-areas: "add-colour-sidebar main-column gutter"
+grid-template-areas: "add-colour-sidebar main-column gutter";
+width: 100%;
+@media (max-width: 1024px) {
+  padding: 0 1rem;
+  grid-template-columns: auto;
+  @media (max-width: 768px) {
+    grid-template-areas: "add-colour-sidebar gutter gutter"
+  "main-column main-column main-column";
+  width: 90%;
+  }
+  @media (max-width: 414px) {
+    margin: 24px auto;
+    grid-template-areas: "add-colour-sidebar"
+  "main-column";    
+  }
+}
 `
 const Title = styled.h1 `
 font-size: 3rem;
@@ -47,6 +64,7 @@ margin-left: 0;
 
 const ColumnMain = styled.div `
 position: relative;
+grid-area: main-column;
 `
 
 const Column  = styled.div `
@@ -58,7 +76,10 @@ display: flex;
 -ms-flex-direction: column;
 flex-direction: column;
 height: calc(100vh - 200px);
-`
+grid-area: add-colour-sidebar;
+@media (max-width: 768px) {
+  height: auto;
+}`
 
 
 class App extends Component {

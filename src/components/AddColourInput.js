@@ -30,6 +30,12 @@ animation: ${dropDownAnimation} 0.225s ease-out;` : `max-height: 200px;`}
 h2 {
     margin: 0;
 }
+@media (max-width: 768px) {
+    margin-top: 0;
+  }
+  @media (max-width: 415px) {
+    width: 100%;
+  }  
 `
 
 const PreviewStyles = styled.div`
