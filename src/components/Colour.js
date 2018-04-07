@@ -42,7 +42,6 @@ background: var(--contentBackgroundColour);
 const ColourSwatch = styled.div`
 height: 140px;
 background: ${props => {
-        console.log(props)
         return props.hex
     }
     }
