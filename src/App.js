@@ -101,7 +101,6 @@ class App extends Component {
       asArray: true,
       then: function () {
         this.setState({ loading: false })
-        console.info("Syncing with Firebase");
       },
       onFailure: function () {
         console.error("Failed to sync state with Firebase");
@@ -130,11 +129,9 @@ class App extends Component {
     const alreadyExists = this.state.colours.filter(colour => colour.hex === newColour.hex || colour.rgb === newColour.rgb).length > 0;
 
     if (alreadyExists) {
-      console.error('Colour already exists!')
       alert('Colour already exists!')
     }
     else {
-      console.log(newColour)
      this.setState({ colours: this.state.colours.concat([newColour]) });
     }
   }
