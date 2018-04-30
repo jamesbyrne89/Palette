@@ -1,5 +1,5 @@
 :root {
-  --backgroundColour: #221F2D;
+  --backgroundColour: #221f2d;
   --backgroundColourSecondary: #242130;
   --contentBackgroundColour: #353549;
   --textColour: #fff;
@@ -21,7 +21,7 @@ label {
 }
 
 input.valid {
-  border: solid 1.5px #82DDA9;
+  border: solid 1.5px #82dda9;
 }
 
 input.invalid {

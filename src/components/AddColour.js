@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 import '../styles/styles.css';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
+const Column = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: calc(100vh - 204px);
+  grid-area: add-colour-sidebar;
+  @media (max-width: 768px) {
+    height: auto;
+  }
+`;
 class AddColour extends Component {
   constructor(props) {
     super(props);
@@ -82,7 +97,7 @@ class AddColour extends Component {
     const { addColour } = this.props;
     const { hex, rgb } = this.state.colour;
     return (
-      <div className="add-colour">
+      <Column>
         <h2>Add a colour:</h2>
         <input
           className="add-colour-input"
@@ -105,7 +120,7 @@ class AddColour extends Component {
             <div className="preview__rgb">{rgb}</div>
           </div>
         </div>
-      </div>
+      </Column>
     );
   }
 }

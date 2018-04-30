@@ -62,8 +62,8 @@ const ColourDetailsHoverOverlay = styled.div`
   padding: 0.55em 0.5em 0.45em;
   color: var(--contentBackgroundColour);
   background: #fff;
-  -webkit-transition: opacity 0.225s;
-  transition: opacity 0.225s;
+  -webkit-transition: opacity 0.15s;
+  transition: opacity 0.15s;
   font-weight: 700;
 `;
 

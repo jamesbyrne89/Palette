@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles/styles.css';
 import base from './db/base';
 import Header from './components/Header';
+import Title from './components/Title';
 import LoadingIcon from './components/LoadingIcon';
 import ColourList from './components/ColourList';
 import AddColourInput from './components/AddColourInput';
@@ -52,31 +53,10 @@ grid-template-areas: "add-colour-sidebar main-column gutter";
   }
 }
 `;
-const Title = styled.h1`
-  font-size: 3rem;
-  font-family: var(--headerFont);
-  font-weight: 300;
-  margin-left: 0;
-`;
 
 const ColumnMain = styled.div`
   position: relative;
   grid-area: main-column;
-`;
-
-const Column = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: calc(100vh - 204px);
-  grid-area: add-colour-sidebar;
-  @media (max-width: 768px) {
-    height: auto;
-  }
 `;
 
 class App extends Component {
@@ -99,7 +79,7 @@ class App extends Component {
       then: function() {
         this.setState({ loading: false });
       },
-      onFailure: function() {
+      onFailure: () => {
         console.error('Failed to sync state with Firebase');
       }
     });
@@ -146,14 +126,12 @@ class App extends Component {
       <AppStyles>
         <Header />
         <Container>
-          <Column>
-            <AddColourInput
-              colours={colours}
-              addColour={this.addColour}
-              previewColour={this.previewColour}
-              colourToAdd={colourToAdd}
-            />
-          </Column>
+          <AddColourInput
+            colours={colours}
+            addColour={this.addColour}
+            previewColour={this.previewColour}
+            colourToAdd={colourToAdd}
+          />
           <ColumnMain>
             <div className="colours">
               <Title>Colours</Title>
