@@ -4,17 +4,26 @@ import firebase from 'firebase';
 // Firebase
 
 var config = {
-    apiKey: process.env.REACT_APP_FIREBASE_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
-  };
- 
- const app = firebase.initializeApp(config);
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
+};
+
+const app = firebase.initializeApp(config);
 
 //const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
-const base = Rebase.createClass(app.database())
+const base = Rebase.createClass(app.database());
+
+var connectedRef = firebase.database().ref('.info/connected');
+connectedRef.on('value', function(snap) {
+  if (snap.val() === true) {
+    console.log('connected');
+  } else {
+    console.log('not connected');
+  }
+});
 
 export default base;

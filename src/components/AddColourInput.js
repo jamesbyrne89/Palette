@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../styles/styles.css';
 import ColourInputBox from '../components/ColourInputBox';
 import styled from 'styled-components';
-import Transition from 'react-transition-group';
 
 const dropDownAnimation = () => {
   `

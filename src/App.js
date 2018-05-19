@@ -63,7 +63,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      colours: [],
+      colours: [] || localStorage.getItem('colours'),
       loading: true
     };
     this.addColour = this.addColour.bind(this);
@@ -78,6 +78,8 @@ class App extends Component {
       asArray: true,
       then: function() {
         this.setState({ loading: false });
+        var cached = JSON.stringify(this.state.colours);
+        localStorage.setItem('colours', cached);
       },
       onFailure: () => {
         console.error('Failed to sync state with Firebase');
