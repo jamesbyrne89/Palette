@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import './styles/styles.css';
-import base from './db/base';
+import base, { connectedRef } from './db/base';
 import Header from './components/Header';
 import Title from './components/Title';
 import LoadingIcon from './components/LoadingIcon';
 import ColourList from './components/ColourList';
 import AddColourInput from './components/AddColourInput';
 import styled from 'styled-components';
+import ConnectionStatusBar from './components/ConnectionStatusBar';
 
 const body = document.querySelector('body');
 
 body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'));
 
 const AppStyles = styled.div`
+  position: relative;
   min-height: 100vh;
   background: linear-gradient(
     -45deg,
@@ -30,6 +32,7 @@ const AppStyles = styled.div`
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const Container = styled.main`
@@ -63,8 +66,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      colours: [] || localStorage.getItem('colours'),
-      loading: true
+      colours: [],
+      loading: true,
+      online: true,
+      showStatusBar: false
     };
     this.addColour = this.addColour.bind(this);
     this.removeColour = this.removeColour.bind(this);
@@ -82,7 +87,25 @@ class App extends Component {
         localStorage.setItem('colours', cached);
       },
       onFailure: () => {
+        this.setState({ colours: localStorage.getItem('colours') });
         console.error('Failed to sync state with Firebase');
+      }
+    });
+  }
+
+  componentDidMount() {
+    let _this = this;
+    connectedRef.on('value', function(snap) {
+      console.log('match:', snap.val() === _this.state.online);
+      if (snap.val() === true) {
+        _this.setState({ online: true });
+      } else {
+        _this.setState({ online: false });
+      }
+      if (snap.val() === _this.state.online) {
+        _this.setState({ showStatusBar: true });
+      } else {
+        _this.setState({ showStatusBar: false });
       }
     });
   }
@@ -145,6 +168,10 @@ class App extends Component {
             </div>
           </ColumnMain>
         </Container>
+        <ConnectionStatusBar
+          show={this.state.showStatusBar}
+          connected={this.state.online}
+        />
       </AppStyles>
     );
   }

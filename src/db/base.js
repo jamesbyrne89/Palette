@@ -17,13 +17,6 @@ const app = firebase.initializeApp(config);
 //const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
 const base = Rebase.createClass(app.database());
 
-var connectedRef = firebase.database().ref('.info/connected');
-connectedRef.on('value', function(snap) {
-  if (snap.val() === true) {
-    console.log('connected');
-  } else {
-    console.log('not connected');
-  }
-});
+export const connectedRef = firebase.database().ref('.info/connected');
 
 export default base;
