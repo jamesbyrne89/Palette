@@ -32,7 +32,7 @@ const ConnectionStatusBarStyles = styled.div`
   transform: translateY(100%);
   ${props =>
     props.connected ? `background: var(--onlineColour);` : `background: red`};
-  ${props => props.show && `animation: ${popup} 4s both;`};
+  ${props => props.show && props.connected ? `animation: ${popup} 4s both;` : `transform: translateY(0);`};
 `;
 
 const ConnectionStatusBar = props => {

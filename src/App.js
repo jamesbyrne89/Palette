@@ -96,7 +96,6 @@ class App extends Component {
   componentDidMount() {
     let _this = this;
     connectedRef.on('value', function(snap) {
-      console.log('match:', snap.val() === _this.state.online);
       if (snap.val() === true) {
         _this.setState({ online: true });
       } else {
