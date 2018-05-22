@@ -112,7 +112,7 @@ const Colour = props => {
             </ColourDetailsHoverOverlay>
           </ColourHex>
         </CopyToClipboard>
-        <CopyToClipboard text={colour.hex} onCopy={() => console.log('copied')}>
+        <CopyToClipboard text={colour.rgb} onCopy={() => console.log('copied')}>
           <ColourRgb>
             {colour.rgb}
             <ColourDetailsHoverOverlay>

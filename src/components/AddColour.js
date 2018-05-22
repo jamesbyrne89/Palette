@@ -30,44 +30,11 @@ class AddColour extends Component {
       }
     };
 
-    this.validateColour = this.validateColour.bind(this);
     this.isHex = this.isHex.bind(this);
   }
 
   isHex(val) {
-    let regex = /^#[0-9A-F]{6}$/i.test(val);
-    return regex;
-  }
-
-  validateColour() {
-    const { value } = this.refs.newColourInput;
-
-    this.setState({
-      colour: {
-        isValid: false,
-        hex: null,
-        rgb: null
-      }
-    });
-
-    if (value.split('')[0] === '#') {
-      if (value.length >= 7 && !this.isHex(value)) {
-        this.refs.newColourInput.classList.add('invalid');
-        return false;
-      }
-      // Is valid hex
-      else if (value.length >= 7 && this.isHex(value)) {
-        this.refs.newColourInput.classList.add('valid');
-        this.setState({
-          colour: {
-            isValid: true,
-            hex: value,
-            key: this.props.colours.length,
-            rgb: this.hexToRgb(value, 'formatted')
-          }
-        });
-      }
-    }
+    return /^#[0-9A-F]{6}$/i.test(val);
   }
 
   hexToRgb(hex, format) {
@@ -88,10 +55,6 @@ class AddColour extends Component {
     }
     return null;
   }
-
-  // rgbToHex(r, g, b) {
-  //   return   "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-  // }
 
   render() {
     const { addColour } = this.props;
