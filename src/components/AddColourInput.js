@@ -1,73 +1,10 @@
 import React, { Component } from 'react';
 import '../styles/styles.css';
 import ColourInputBox from '../components/ColourInputBox';
+import AddColourContainer from '../components/AddColourContainer';
+import Preview from '../components/Preview';
+import PreviewDetails from '../components/PreviewDetails';
 import styled from 'styled-components';
-
-const dropDownAnimation = () => {
-  `
-        0% {
-            max-height: 140px;
-        }
-        60% {
-            max-height: 350px;
-        }
-        100% {
-            max-height: 320px;
-        }
-    `;
-};
-
-const AddColourContainer = styled.div`
-  padding: 1.5em;
-  background: var(--contentBackgroundColour);
-  width: 300px;
-  overflow: hidden;
-  margin-top: 120px;
-  -webkit-transition: all 0.225s ease-in-out;
-  transition: all 0.225s ease-in-out;
-  ${props =>
-    props.expanded
-      ? `max-height: 330px;
-animation: ${dropDownAnimation} 0.225s ease-in-out;`
-      : `max-height: 140px;`} h2 {
-    margin: 0;
-    line-height: 1;
-  }
-  @media (max-width: 768px) {
-    margin-top: 0;
-  }
-  @media (max-width: 415px) {
-    width: 100%;
-  }
-`;
-
-const PreviewStyles = styled.div`
-  -webkit-transition: opacity 0.25s 0.25s ease-out;
-  transition: opacity 0.25s 0.25s ease-out;
-  ${props =>
-    props.visible
-      ? `opacity: 1;
-
-height: auto;`
-      : `opacity: 0;
-height: 0; overflow: hidden;
-`};
-`;
-
-const PreviewDetails = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 1em 0;
-`;
-
-const PreviewBlock = styled.div`
-  margin-top: 2.5em;
-  height: 2em;
-`;
 
 class AddColourInput extends Component {
   constructor(props) {
@@ -189,16 +126,7 @@ class AddColourInput extends Component {
           handleKeyPress={this.handleKeyPress}
           hex={hex}
         />
-        <PreviewStyles visible={showPreview}>
-          <PreviewBlock hex={hex} style={{ background: hex }} />
-          <PreviewDetails>
-            <div className="preview__hex">{hex}</div>
-            <div className="preview__rgb">{rgb}</div>
-          </PreviewDetails>
-          <button className="btn submit-btn" onClick={this.handleAddColour}>
-            Add
-          </button>
-        </PreviewStyles>
+        <Preview hex={hex} rgb={rgb} visible={showPreview} />
       </AddColourContainer>
     );
   }
