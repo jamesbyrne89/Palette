@@ -59,32 +59,7 @@ class AddColour extends Component {
   render() {
     const { addColour } = this.props;
     const { hex, rgb } = this.state.colour;
-    return (
-      <Column>
-        <h2>Add a colour:</h2>
-        <input
-          className="add-colour-input"
-          type="text"
-          maxLength="12"
-          placeholder="Enter a hex or RGB code"
-          ref="newColourInput"
-          onChange={this.validateColour}
-        />
-        <button className="submit-btn" onClick={addColour}>
-          Add
-        </button>
-        <div className={`preview${hex ? ' show' : ' invisible'}`}>
-          <div
-            className="preview__block"
-            style={{ background: hex, height: '40px' }}
-          />
-          <div className="preview__details">
-            <div className="preview__hex">{hex}</div>
-            <div className="preview__rgb">{rgb}</div>
-          </div>
-        </div>
-      </Column>
-    );
+    return <Column />;
   }
 }
 

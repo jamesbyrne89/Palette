@@ -22,6 +22,12 @@ class AddColourInput extends Component {
     }
   };
 
+  handleAddColour = () => {
+    this.props.addColour(this.state.colourToAdd);
+  };
+
+  clearInput = () => {};
+
   render() {
     const { showPreview } = this.state;
     const hex = this.state.colourToAdd ? this.state.colourToAdd.hex : null;
@@ -32,11 +38,16 @@ class AddColourInput extends Component {
         <h2>Add a colour:</h2>
         <ColourInputBox
           validateColour={this.validateColour}
-          handleKeyPress={this.handleKeyPress}
+          handleAddColour={this.handleAddColour}
           previewHandler={this.previewHandler}
           hex={hex}
         />
-        <Preview hex={hex} rgb={rgb} visible={showPreview} />
+        <Preview
+          hex={hex}
+          rgb={rgb}
+          handleAddColour={this.handleAddColour}
+          visible={showPreview}
+        />
       </AddColourContainer>
     );
   }

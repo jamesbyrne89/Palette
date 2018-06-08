@@ -122,6 +122,7 @@ class App extends Component {
   }
 
   addColour(newColour) {
+    console.log(newColour);
     const alreadyExists =
       this.state.colours.filter(
         colour => colour.hex === newColour.hex || colour.rgb === newColour.rgb

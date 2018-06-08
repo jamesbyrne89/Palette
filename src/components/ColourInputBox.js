@@ -26,6 +26,7 @@ class ColourInputBox extends Component {
   }
 
   handleChange = e => {
+    e.stopPropagation();
     let input = e.target.value;
     let newColour = {};
     this.setState({ value: input });
@@ -34,16 +35,25 @@ class ColourInputBox extends Component {
       newColour.rgb = this.hexToRgb(input);
       this.setState({ colourToAdd: newColour });
       this.previewHandler(newColour);
-      return;
     }
     if (this.isRGB(input)) {
       newColour.hex = input;
       newColour.rgb = this.rgbToHex(input);
       this.setState({ colourToAdd: newColour });
       this.previewHandler(newColour);
-      return;
     }
-    this.previewHandler();
+    if (!this.isHex(input) && !this.isRGB(input)) {
+      this.setState({ colourToAdd: null });
+      this.previewHandler();
+    }
+
+    if (e.keyCode === 13) {
+      if (this.state.colourToAdd !== null) {
+        this.handleSubmit();
+      } else {
+        this.handleErrors();
+      }
+    }
   };
 
   previewHandler = state => {
@@ -93,54 +103,12 @@ class ColourInputBox extends Component {
       : '';
   };
 
-  validateColour = val => {
-    const colour = {};
-    const isHex = this.isHex(val);
-    const isRGB = this.isRGB(val);
-
-    if (isHex) {
-      colour.hex = val.toUpperCase();
-      colour.rgb = this.hexToRgb(val, true);
-    } else if (isRGB) {
-      colour.hex = this.rgbToHex(val).toUpperCase();
-      colour.rgb = val;
-    }
-    // Valid colour
-    colour.key = this.props.colours.length;
-    if (colour.hex && colour.rgb) {
-      this.previewColour(colour);
-    } else {
-      this.setState({ colourToAdd: null });
-      return null;
-    }
+  handleSubmit = () => {
+    this.props.handleAddColour();
   };
 
-  previewColour = newColour => {
-    this.setState({ colourToAdd: newColour });
-  };
-
-  handleAddColour = () => {
-    this.props.addColour(this.state.colourToAdd);
-    this.setState({ colourToAdd: null });
-  };
-
-  handleKeyPress = e => {
-    this.validateColour(e.target.value);
-    const validColour = this.state.colourToAdd;
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      if (validColour) {
-        this.handleAddColour(validColour);
-      } else {
-        this.handleErrors();
-      }
-    }
-  };
-
-  handleErrors = input => {
-    if (!this.validateColour(input)) {
-      alert('Sorry, that does not seem to be a valid colour');
-    }
+  handleErrors = () => {
+    alert(`That doesn't seem to be a valid colour!`);
   };
 
   render() {
@@ -150,6 +118,7 @@ class ColourInputBox extends Component {
         maxLength="12"
         placeholder="Enter a hex or RGB code"
         onChange={this.handleChange}
+        onKeyUp={this.handleChange}
         autofocus
       />
     );
