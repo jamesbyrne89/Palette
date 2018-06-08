@@ -46,7 +46,6 @@ class ColourInputBox extends Component {
       this.setState({ colourToAdd: null });
       this.previewHandler();
     }
-
     if (e.keyCode === 13) {
       if (this.state.colourToAdd !== null) {
         this.handleSubmit();
@@ -105,6 +104,8 @@ class ColourInputBox extends Component {
 
   handleSubmit = () => {
     this.props.handleAddColour();
+    this.setState({ value: '', colourToAdd: null });
+    this.props.previewHandler();
   };
 
   handleErrors = () => {
@@ -119,6 +120,7 @@ class ColourInputBox extends Component {
         placeholder="Enter a hex or RGB code"
         onChange={this.handleChange}
         onKeyUp={this.handleChange}
+        value={this.state.value}
         autofocus
       />
     );

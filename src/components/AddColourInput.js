@@ -26,8 +26,6 @@ class AddColourInput extends Component {
     this.props.addColour(this.state.colourToAdd);
   };
 
-  clearInput = () => {};
-
   render() {
     const { showPreview } = this.state;
     const hex = this.state.colourToAdd ? this.state.colourToAdd.hex : null;
