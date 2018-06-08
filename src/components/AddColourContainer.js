@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const dropDownAnimation = () => {
+const dropDownAnimation = () =>
   `
           0% {
               max-height: 140px;
@@ -13,7 +12,6 @@ const dropDownAnimation = () => {
               max-height: 320px;
           }
       `;
-};
 
 const AddColourContainer = styled.div`
   padding: 1.5em;
