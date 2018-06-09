@@ -14,6 +14,18 @@ const InputStyles = styled.input`
   font-weight: 300;
   margin-top: 1em;
   width: 100%;
+  transition: all 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  &::after {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    content: 'Error';
+    width: 100px;
+    height: 10px;
+    background: lilac;
+  }
+  ${({ valid }) => valid === true && `border: solid 1.5px #05c46b;`};
+  ${({ valid }) => valid === false && `border: solid 1.5px #ff4d4d; `};
 `;
 
 class ColourInputBox extends Component {
@@ -21,7 +33,8 @@ class ColourInputBox extends Component {
     super(props);
     this.state = {
       value: '',
-      colourToAdd: null
+      colourToAdd: null,
+      valid: null
     };
   }
 
@@ -32,18 +45,18 @@ class ColourInputBox extends Component {
     this.setState({ value: input });
     if (this.isHex(input)) {
       newColour.hex = input;
-      newColour.rgb = this.hexToRgb(input);
-      this.setState({ colourToAdd: newColour });
+      newColour.rgb = this.hexToRgb(input, true);
+      this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
     if (this.isRGB(input)) {
       newColour.hex = input;
       newColour.rgb = this.rgbToHex(input);
-      this.setState({ colourToAdd: newColour });
+      this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
     if (!this.isHex(input) && !this.isRGB(input)) {
-      this.setState({ colourToAdd: null });
+      this.setState({ colourToAdd: null, valid: null });
       this.previewHandler();
     }
     if (e.keyCode === 13) {
@@ -104,12 +117,12 @@ class ColourInputBox extends Component {
 
   handleSubmit = () => {
     this.props.handleAddColour();
-    this.setState({ value: '', colourToAdd: null });
+    this.setState({ value: '', colourToAdd: null, valid: null });
     this.props.previewHandler();
   };
 
   handleErrors = () => {
-    alert(`That doesn't seem to be a valid colour!`);
+    this.setState({ valid: false });
   };
 
   render() {
@@ -118,6 +131,7 @@ class ColourInputBox extends Component {
         type="text"
         maxLength="12"
         placeholder="Enter a hex or RGB code"
+        valid={this.state.valid}
         onChange={this.handleChange}
         onKeyUp={this.handleChange}
         value={this.state.value}

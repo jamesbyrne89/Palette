@@ -9,6 +9,7 @@ const PreviewDetailsWrapper = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 1em 0;
+  text-transform: uppercase;
 `;
 
 const PreviewDetails = ({ hex, rgb }) => (
