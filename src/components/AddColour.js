@@ -59,7 +59,11 @@ class AddColour extends Component {
   render() {
     const { addColour } = this.props;
     const { hex, rgb } = this.state.colour;
-    return <Column />;
+    return (
+      <Column>
+        <h2>Add a colour:</h2>
+      </Column>
+    );
   }
 }
 

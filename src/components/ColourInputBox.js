@@ -15,15 +15,7 @@ const InputStyles = styled.input`
   margin-top: 1em;
   width: 100%;
   transition: all 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22);
-  &::after {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    content: 'Error';
-    width: 100px;
-    height: 10px;
-    background: lilac;
-  }
+
   ${({ valid }) => valid === true && `border: solid 1.5px #05c46b;`};
   ${({ valid }) => valid === false && `border: solid 1.5px #ff4d4d; `};
 `;
@@ -43,9 +35,16 @@ class ColourInputBox extends Component {
     let input = e.target.value;
     let newColour = {};
     this.setState({ value: input });
+    console.log(`#${input}`);
     if (this.isHex(input)) {
       newColour.hex = input;
       newColour.rgb = this.hexToRgb(input, true);
+      this.setState({ colourToAdd: newColour, valid: true });
+      this.previewHandler(newColour);
+    }
+    if (this.isHex(`#${input}`)) {
+      newColour.hex = `#${input}`;
+      newColour.rgb = this.hexToRgb(`#${input}`, true);
       this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
@@ -55,7 +54,12 @@ class ColourInputBox extends Component {
       this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
-    if (!this.isHex(input) && !this.isRGB(input)) {
+    if (
+      !this.isHex(input) &&
+      !this.isHex(`#${input}`) &&
+      !this.isRGB(input) &&
+      !this.isRGB(`#${input}`)
+    ) {
       this.setState({ colourToAdd: null, valid: null });
       this.previewHandler();
     }
