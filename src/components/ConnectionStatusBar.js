@@ -17,14 +17,14 @@ transform: translateY(0);
 `;
 
 const ConnectionStatusBarStyles = styled.div`
-  --onlineColour: #05c46b;
-  --offlineColour: #ff4d4d;
+  --onlineColour: #3c40c6;
+  --offlineColour: #d98e90;
   padding: 0.75em 1em;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -32,7 +32,10 @@ const ConnectionStatusBarStyles = styled.div`
   transform: translateY(100%);
   ${props =>
     props.connected ? `background: var(--onlineColour);` : `background: red`};
-  ${props => props.show && props.connected ? `animation: ${popup} 4s both;` : `transform: translateY(0);`};
+  ${props =>
+    props.show && props.connected
+      ? `animation: ${popup} 4s both;`
+      : `transform: translateY(0);`};
 `;
 
 const ConnectionStatusBar = props => {

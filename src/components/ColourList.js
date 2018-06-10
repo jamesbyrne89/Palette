@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/styles.css';
-import Colour from './Colour';
+import Colour from './Colour/Colour';
 import styled from 'styled-components';
 
 const ColourStyles = styled.div`
@@ -32,7 +32,7 @@ const ListOfColours = styled.div`
 const ColourList = props => {
   return (
     <ListOfColours>
-      {props.handleLoading()}
+      {/* {props.handleLoading()} */}
       {props.colours.map((col, i) => (
         <ColourStyles key={i} colour={col}>
           <Colour

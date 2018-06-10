@@ -8,6 +8,6 @@ const TitleStyles = styled.h1`
   margin-left: 0;
 `;
 
-const Title = () => <TitleStyles>Palette</TitleStyles>;
+const Title = () => <TitleStyles>Palettes</TitleStyles>;
 
 export default Title;

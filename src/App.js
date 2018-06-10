@@ -8,6 +8,11 @@ import ColourList from './components/ColourList';
 import AddColourInput from './components/AddColourInput';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
+import PalettesContainer from './components/PalettesContainer';
+import Toaster, {
+  StyledToasterOverlay,
+  StyledToaster
+} from './components/Toaster';
 
 const body = document.querySelector('body');
 
@@ -16,13 +21,14 @@ body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'));
 const AppStyles = styled.div`
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(
-    -45deg,
-    var(--backgroundColour) 0%,
-    var(--backgroundColour) 50%,
-    var(--backgroundColourSecondary) 50%,
-    var(--backgroundColourSecondary) 100%
-  );
+  background: var(--backgroundColour);
+  // background: linear-gradient(
+  //   -45deg,
+  //   var(--backgroundColour) 0%,
+  //   var(--backgroundColour) 50%,
+  //   var(--backgroundColourSecondary) 50%,
+  //   var(--backgroundColourSecondary) 100%
+  // );
   color: var(--textColour);
   font-family: var(--bodyFont);
   display: -webkit-box;
@@ -67,6 +73,21 @@ class App extends Component {
     super();
     this.state = {
       colours: [],
+      palettes: [
+        {
+          name: 'Warehouse',
+          colours: []
+        },
+        {
+          name: 'My Palette',
+          colours: [
+            {
+              hex: '#b4d455',
+              rgb: '1,1,1'
+            }
+          ]
+        }
+      ],
       loading: true,
       online: true,
       showStatusBar: false
@@ -77,9 +98,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    base.syncState('colours', {
+    base.syncState('palettes', {
       context: this,
-      state: 'colours',
+      state: 'palettes',
       asArray: true,
       then: function() {
         this.setState({ loading: false });
@@ -87,7 +108,7 @@ class App extends Component {
         localStorage.setItem('colours', cached);
       },
       onFailure: () => {
-        this.setState({ colours: localStorage.getItem('colours') });
+        this.setState({ colours: JSON.parse(localStorage.getItem('colours')) });
         console.error('Failed to sync state with Firebase');
       }
     });
@@ -144,7 +165,7 @@ class App extends Component {
   }
 
   render() {
-    const { colours, colourToAdd } = this.state;
+    const { colours, colourToAdd, palettes } = this.state;
 
     return (
       <AppStyles>
@@ -159,17 +180,28 @@ class App extends Component {
           <ColumnMain>
             <div className="colours">
               <Title>Colours</Title>
-              <ColourList
+              <PalettesContainer palettes={palettes} />
+              {/* <ColourList
                 colours={colours}
                 removeColour={this.removeColour}
                 handleLoading={this.handleLoading}
-              />
+              /> */}
             </div>
           </ColumnMain>
         </Container>
         <ConnectionStatusBar
           show={this.state.showStatusBar}
           connected={this.state.online}
+        />
+        <Toaster
+          render={({ open }, close) =>
+            open && (
+              <div>
+                <StyledToasterOverlay onClick={close} />
+                <StyledToaster>This is a toaster</StyledToaster>
+              </div>
+            )
+          }
         />
       </AppStyles>
     );
