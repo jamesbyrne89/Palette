@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import App from '../App';
 
 export const StyledToaster = styled.div`
   padding: 1em;

@@ -193,6 +193,7 @@ class App extends Component {
           show={this.state.showStatusBar}
           connected={this.state.online}
         />
+
         <Toaster
           render={({ open }, close) =>
             open && (
@@ -203,6 +204,7 @@ class App extends Component {
             )
           }
         />
+        <div id="modal-container" />
       </AppStyles>
     );
   }

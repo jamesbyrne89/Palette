@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import PaletteHeader from './PaletteHeader';
 import PaletteColours from './PaletteColours';
-import { Delete } from '../Icons/Icons';
+import { Add, Delete } from '../Icons/Icons';
 
 const StyledActions = styled.article`
   display: flex;
@@ -12,9 +11,7 @@ const StyledActions = styled.article`
 
 const PaletteActions = props => (
   <StyledActions>
-    <Delete />
-    <Delete />
-    <Delete />
+    <Add />
     <Delete />
   </StyledActions>
 );

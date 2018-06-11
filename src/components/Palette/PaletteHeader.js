@@ -13,7 +13,7 @@ const StyledPaletteHeader = styled.header`
 const PaletteHeader = props => (
   <StyledPaletteHeader>
     {props.palette.name}
-    <PaletteActions />
+    <PaletteActions {...props} />
   </StyledPaletteHeader>
 );
 
