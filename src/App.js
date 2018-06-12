@@ -9,6 +9,7 @@ import AddColourInput from './components/AddColourInput';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
+import Portal from './components/PopupPortal';
 import Toaster, {
   StyledToasterOverlay,
   StyledToaster
@@ -193,18 +194,18 @@ class App extends Component {
           show={this.state.showStatusBar}
           connected={this.state.online}
         />
-
-        <Toaster
-          render={({ open }, close) =>
-            open && (
-              <div>
-                <StyledToasterOverlay onClick={close} />
-                <StyledToaster>This is a toaster</StyledToaster>
-              </div>
-            )
-          }
-        />
-        <div id="modal-container" />
+        <Portal>
+          <Toaster
+            render={({ open }, close) =>
+              open && (
+                <div>
+                  <StyledToasterOverlay onClick={close} />
+                  <StyledToaster>This is a toaster</StyledToaster>
+                </div>
+              )
+            }
+          />
+        </Portal>
       </AppStyles>
     );
   }
