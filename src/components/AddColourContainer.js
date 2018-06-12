@@ -17,8 +17,8 @@ const AddColourContainer = styled.div`
   padding: 1.5em;
   background: var(--contentBackgroundColour);
   width: 300px;
+  color: #fff;
   overflow: hidden;
-  margin-top: 120px;
   -webkit-transition: all 0.225s ease-in-out;
   transition: all 0.225s ease-in-out;
   ${props =>

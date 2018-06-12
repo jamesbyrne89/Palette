@@ -30,13 +30,13 @@ class Toaster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: false
     };
-    this.open = this.open.bind(this);
+    this.doOpen = this.doOpen.bind(this);
     this.close = this.close.bind(this);
   }
 
-  open() {
+  doOpen() {
     this.setState({ open: true });
   }
 
@@ -46,8 +46,8 @@ class Toaster extends Component {
 
   render() {
     const { open } = this.state;
-    const { render } = this.props;
-    return render(this.state, this.close);
+    const { render, children } = this.props;
+    return render(this.state, this.doOpen, this.close);
   }
 }
 

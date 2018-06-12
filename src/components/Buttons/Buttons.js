@@ -1,11 +1,30 @@
 import React from 'react';
-import { Add } from '../Icons/Icons';
+import { Add, Delete } from '../Icons/Icons';
+import styled from 'styled-components';
 
-export const AddColourButton = () => {
-  const onLaunchAddColour = () => {};
+const StyledButton = styled.button`
+  cursor: pointer;
+  background: none;
+  border: none;
+  height: 1.25rem;
+  width: auto;
+`;
+
+export const AddColourButton = props => {
+  const onLaunchAddColour = props => {
+    console.log(props.isOpen);
+  };
   return (
-    <button onClick={onLaunchAddColour}>
+    <StyledButton onClick={() => props.open(props)}>
       <Add />
-    </button>
+    </StyledButton>
+  );
+};
+
+export const DeletePaletteButton = props => {
+  return (
+    <StyledButton>
+      <Delete />
+    </StyledButton>
   );
 };

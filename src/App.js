@@ -182,11 +182,6 @@ class App extends Component {
             <div className="colours">
               <Title>Colours</Title>
               <PalettesContainer palettes={palettes} />
-              {/* <ColourList
-                colours={colours}
-                removeColour={this.removeColour}
-                handleLoading={this.handleLoading}
-              /> */}
             </div>
           </ColumnMain>
         </Container>
@@ -194,18 +189,6 @@ class App extends Component {
           show={this.state.showStatusBar}
           connected={this.state.online}
         />
-        <Portal>
-          <Toaster
-            render={({ open }, close) =>
-              open && (
-                <div>
-                  <StyledToasterOverlay onClick={close} />
-                  <StyledToaster>This is a toaster</StyledToaster>
-                </div>
-              )
-            }
-          />
-        </Portal>
       </AppStyles>
     );
   }

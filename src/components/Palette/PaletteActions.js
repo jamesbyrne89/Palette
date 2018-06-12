@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PaletteColours from './PaletteColours';
-import { Add, Delete } from '../Icons/Icons';
+import { Add } from '../Icons/Icons';
+import { AddColourButton, DeletePaletteButton } from '../Buttons/Buttons';
+import Portal from '../PopupPortal';
+import Toaster, { StyledToasterOverlay, StyledToaster } from '../Toaster';
+import AddColourInput from '../AddColourInput';
 
 const StyledActions = styled.article`
   display: flex;
@@ -11,8 +15,22 @@ const StyledActions = styled.article`
 
 const PaletteActions = props => (
   <StyledActions>
-    <Add />
-    <Delete />
+    <Toaster
+      render={({ open }, doOpen, close) =>
+        open ? (
+          <Portal>
+            <StyledToasterOverlay onClick={close} />
+            <StyledToaster>
+              <AddColourInput />
+            </StyledToaster>
+          </Portal>
+        ) : (
+          <AddColourButton isOpen={open} open={doOpen} {...props} />
+        )
+      }
+    />
+
+    <DeletePaletteButton />
   </StyledActions>
 );
 
