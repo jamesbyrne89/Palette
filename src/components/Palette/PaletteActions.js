@@ -21,7 +21,7 @@ const PaletteActions = props => (
           <Portal>
             <StyledToasterOverlay onClick={close} />
             <StyledToaster>
-              <AddColourInput />
+              <AddColourInput {...props} />
             </StyledToaster>
           </Portal>
         ) : (

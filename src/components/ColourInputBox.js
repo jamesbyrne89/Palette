@@ -20,6 +20,18 @@ const InputStyles = styled.input`
   ${({ valid }) => valid === false && `border: solid 1.5px #ff4d4d; `};
 `;
 
+const isHex = hex => {
+  let regex = /^#[0-9A-F]{6}$/i.test(hex);
+  return regex;
+};
+
+const isRGB = rgb => {
+  const isRGBColour = /rgb\(([01][0-9]?[0-9]?|2[0-4][0-9]|25[0-5]),[\s]?(\d{1,3}),[\s]?(\d{1,3})\)/;
+  if (isRGBColour.test(rgb)) {
+    return isRGBColour;
+  }
+};
+
 class ColourInputBox extends Component {
   constructor(props) {
     super(props);
@@ -36,29 +48,29 @@ class ColourInputBox extends Component {
     let newColour = {};
     this.setState({ value: input });
     console.log(`#${input}`);
-    if (this.isHex(input)) {
+    if (isHex(input)) {
       newColour.hex = input;
       newColour.rgb = this.hexToRgb(input, true);
       this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
-    if (this.isHex(`#${input}`)) {
+    if (isHex(`#${input}`)) {
       newColour.hex = `#${input}`;
       newColour.rgb = this.hexToRgb(`#${input}`, true);
       this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
-    if (this.isRGB(input)) {
+    if (isRGB(input)) {
       newColour.hex = input;
       newColour.rgb = this.rgbToHex(input);
       this.setState({ colourToAdd: newColour, valid: true });
       this.previewHandler(newColour);
     }
     if (
-      !this.isHex(input) &&
-      !this.isHex(`#${input}`) &&
-      !this.isRGB(input) &&
-      !this.isRGB(`#${input}`)
+      !isHex(input) &&
+      !isHex(`#${input}`) &&
+      !isRGB(input) &&
+      !isRGB(`#${input}`)
     ) {
       this.setState({ colourToAdd: null, valid: null });
       this.previewHandler();
@@ -74,18 +86,6 @@ class ColourInputBox extends Component {
 
   previewHandler = state => {
     this.props.previewHandler(state);
-  };
-
-  isHex = hex => {
-    let regex = /^#[0-9A-F]{6}$/i.test(hex);
-    return regex;
-  };
-
-  isRGB = rgb => {
-    const isRGBColour = /rgb\(([01][0-9]?[0-9]?|2[0-4][0-9]|25[0-5]),[\s]?(\d{1,3}),[\s]?(\d{1,3})\)/;
-    if (isRGBColour.test(rgb)) {
-      return isRGBColour;
-    }
   };
 
   hexToRgb = (hex, format) => {

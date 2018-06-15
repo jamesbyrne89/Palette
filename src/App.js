@@ -143,7 +143,7 @@ class App extends Component {
     }
   }
 
-  addColour(newColour) {
+  addColour(newColour, paletteName) {
     const alreadyExists =
       this.state.colours.filter(
         colour => colour.hex === newColour.hex || colour.rgb === newColour.rgb
@@ -152,7 +152,14 @@ class App extends Component {
     if (alreadyExists) {
       alert('Colour already exists!');
     } else {
-      this.setState({ colours: this.state.colours.concat([newColour]) });
+      const updatedPalettes = this.state.palettes.map(palette => {
+        palette.colours =
+          palette.name === paletteName
+            ? palette.colours.concat([newColour])
+            : palette;
+        return palette;
+      });
+      this.setState({ palettes: updatedPalettes });
     }
   }
 
@@ -174,14 +181,16 @@ class App extends Component {
         <Container>
           <AddColourInput
             colours={colours}
-            addColour={this.addColour}
             previewColour={this.previewColour}
             colourToAdd={colourToAdd}
           />
           <ColumnMain>
             <div className="colours">
               <Title>Colours</Title>
-              <PalettesContainer palettes={palettes} />
+              <PalettesContainer
+                palettes={palettes}
+                addColour={this.addColour}
+              />
             </div>
           </ColumnMain>
         </Container>

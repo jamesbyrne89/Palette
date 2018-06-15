@@ -23,7 +23,7 @@ class AddColourInput extends Component {
   };
 
   handleAddColour = () => {
-    this.props.addColour(this.state.colourToAdd);
+    this.props.addColour(this.state.colourToAdd, this.props.palette.name);
   };
 
   render() {
