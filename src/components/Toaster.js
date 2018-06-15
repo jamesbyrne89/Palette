@@ -22,7 +22,7 @@ export const StyledToasterOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.5;
+  opacity: 0.95;
   background: var(--backgroundColour);
 `;
 

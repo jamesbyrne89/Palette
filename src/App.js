@@ -3,17 +3,13 @@ import './styles/styles.css';
 import base, { connectedRef } from './db/base';
 import Header from './components/Header';
 import Title from './components/Title';
+import ViewHeader from './components/ViewHeader';
 import LoadingIcon from './components/LoadingIcon';
-import ColourList from './components/ColourList';
 import AddColourInput from './components/AddColourInput';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
-import Portal from './components/PopupPortal';
-import Toaster, {
-  StyledToasterOverlay,
-  StyledToaster
-} from './components/Toaster';
+import { AddPaletteButton } from './components/Buttons/Buttons';
 
 const body = document.querySelector('body');
 
@@ -94,6 +90,7 @@ class App extends Component {
       showStatusBar: false
     };
     this.addColour = this.addColour.bind(this);
+    this.addPalette = this.addPalette.bind(this);
     this.removeColour = this.removeColour.bind(this);
     this.handleLoading = this.handleLoading.bind(this);
   }
@@ -163,6 +160,8 @@ class App extends Component {
     }
   }
 
+  addPalette() {}
+
   removeColour(index) {
     let newColourList = this.state.colours;
     this.state.colours.splice(index, 1);
@@ -186,7 +185,10 @@ class App extends Component {
           />
           <ColumnMain>
             <div className="colours">
-              <Title>Colours</Title>
+              <ViewHeader>
+                <Title title={'Colours'} />
+                <AddPaletteButton />
+              </ViewHeader>
               <PalettesContainer
                 palettes={palettes}
                 addColour={this.addColour}

@@ -21,10 +21,12 @@ export const AddColourButton = props => {
   );
 };
 
-export const DeletePaletteButton = props => {
-  return (
-    <StyledButton>
-      <Delete />
-    </StyledButton>
-  );
-};
+export const DeletePaletteButton = props => (
+  <StyledButton>
+    <Delete />
+  </StyledButton>
+);
+
+export const AddPaletteButton = props => (
+  <StyledButton>Add Palette</StyledButton>
+);
