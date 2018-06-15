@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import PaletteColours from './PaletteColours';
 import { Add } from '../Icons/Icons';
@@ -6,6 +6,7 @@ import { AddColourButton, DeletePaletteButton } from '../Buttons/Buttons';
 import Portal from '../PopupPortal';
 import Toaster, { StyledToasterOverlay, StyledToaster } from '../Toaster';
 import AddColourInput from '../AddColourInput';
+import Rodal from 'rodal';
 
 const StyledActions = styled.article`
   display: flex;
@@ -16,16 +17,20 @@ const StyledActions = styled.article`
 const PaletteActions = props => (
   <StyledActions>
     <Toaster
-      render={({ open }, doOpen, close) =>
-        open ? (
-          <Portal>
-            <StyledToasterOverlay onClick={close} />
-            <StyledToaster>
-              <AddColourInput {...props} />
-            </StyledToaster>
-          </Portal>
+      render={(visible, show, hide) =>
+        visible ? (
+          <Fragment>
+            <Portal>
+              <Rodal visible={visible} onClose={hide} enterAnimation={'zoom'}>
+                <StyledToaster>
+                  <AddColourInput {...props} />
+                </StyledToaster>
+              </Rodal>
+            </Portal>
+            <AddColourButton isOpen={visible} openToaster={show} {...props} />
+          </Fragment>
         ) : (
-          <AddColourButton isOpen={open} openToaster={doOpen} {...props} />
+          <AddColourButton isOpen={visible} openToaster={show} {...props} />
         )
       }
     />

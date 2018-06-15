@@ -9,8 +9,9 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-pose": "^1.6.4",
-    "react-scripts": "1.1.1",
+    "react-scripts": "^1.1.4",
     "react-transition-group": "^2.3.1",
+    "rodal": "^1.6.3",
     "styled-components": "^3.2.6"
   },
   "scripts": {
@@ -23,7 +24,7 @@
   },
   "devDependencies": {
     "firebase": "^4.13.1",
-    "gh-pages": "^1.1.0",
+    "gh-pages": "^1.2.0",
     "prop-types": "^15.6.1",
     "re-base": "^3.2.2"
   },

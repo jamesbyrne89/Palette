@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import App from '../App';
 
 export const StyledToaster = styled.div`
   padding: 1em;
@@ -30,24 +28,24 @@ class Toaster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      visible: false
     };
-    this.doOpen = this.doOpen.bind(this);
-    this.close = this.close.bind(this);
+    this.show = this.show.bind(this);
+    this.hide = this.hide.bind(this);
   }
 
-  doOpen() {
-    this.setState({ open: true });
-  }
+  show = () => {
+    this.setState({ visible: true });
+  };
 
-  close() {
-    this.setState({ open: false });
-  }
+  hide = () => {
+    this.setState({ visible: false });
+  };
 
   render() {
-    const { open } = this.state;
+    const { visible } = this.state;
     const { render, children } = this.props;
-    return render(this.state, this.doOpen, this.close);
+    return render(visible, this.show, this.hide);
   }
 }
 
