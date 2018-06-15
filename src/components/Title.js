@@ -5,9 +5,9 @@ const TitleStyles = styled.h1`
   font-size: 3rem;
   font-family: var(--headerFont);
   font-weight: 300;
-  margin-left: 0;
+  margin: 0;
 `;
 
-const Title = () => <TitleStyles>Palettes</TitleStyles>;
+const Title = props => <TitleStyles>{props.title}</TitleStyles>;
 
 export default Title;

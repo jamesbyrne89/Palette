@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './styles/styles.css';
 import base, { connectedRef } from './db/base';
 import Header from './components/Header';
-import Title from './components/Title';
+
 import ViewHeader from './components/ViewHeader';
 import LoadingIcon from './components/LoadingIcon';
 import AddColourInput from './components/AddColourInput';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
-import { AddPaletteButton } from './components/Buttons/Buttons';
 
 const body = document.querySelector('body');
 
@@ -185,10 +184,7 @@ class App extends Component {
           />
           <ColumnMain>
             <div className="colours">
-              <ViewHeader>
-                <Title title={'Colours'} />
-                <AddPaletteButton />
-              </ViewHeader>
+              <ViewHeader />
               <PalettesContainer
                 palettes={palettes}
                 addColour={this.addColour}

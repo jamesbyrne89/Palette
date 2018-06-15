@@ -25,7 +25,7 @@ const PaletteActions = props => (
             </StyledToaster>
           </Portal>
         ) : (
-          <AddColourButton isOpen={open} open={doOpen} {...props} />
+          <AddColourButton isOpen={open} openToaster={doOpen} {...props} />
         )
       }
     />

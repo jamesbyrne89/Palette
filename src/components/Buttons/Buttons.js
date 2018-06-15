@@ -10,12 +10,20 @@ const StyledButton = styled.button`
   width: auto;
 `;
 
+const StyledTextButton = styled.button`
+  border: none;
+  background: none;
+  color: #fff;
+  padding: 1em;
+  line-height: 0.8;
+  font-weight: bold;
+  background: var(--contentBackgroundColour);
+  cursor: pointer;
+`;
+
 export const AddColourButton = props => {
-  const onLaunchAddColour = props => {
-    console.log(props.isOpen);
-  };
   return (
-    <StyledButton onClick={() => props.open(props)}>
+    <StyledButton onClick={() => props.openToaster(props)}>
       <Add />
     </StyledButton>
   );
@@ -28,5 +36,7 @@ export const DeletePaletteButton = props => (
 );
 
 export const AddPaletteButton = props => (
-  <StyledButton>Add Palette</StyledButton>
+  <StyledTextButton onClick={() => props.openToaster(props)}>
+    Add Palette
+  </StyledTextButton>
 );
