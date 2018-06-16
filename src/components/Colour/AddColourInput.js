@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import '../styles/styles.css';
-import ColourInputBox from '../components/ColourInputBox';
-import AddColourContainer from '../components/AddColourContainer';
-import Preview from '../components/Preview';
+import ColourInputBox from './ColourInputBox';
+import AddColourContainer from './AddColourContainer';
+import Preview from './Preview';
 
 class AddColourInput extends Component {
   constructor(props) {

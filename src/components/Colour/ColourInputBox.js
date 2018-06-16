@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import '../styles/styles.css';
 import styled from 'styled-components';
 
-const InputStyles = styled.input`
+export const StyledInput = styled.input`
   display: block;
   background: transparent;
   font-size: 1rem;
@@ -131,7 +130,7 @@ class ColourInputBox extends Component {
 
   render() {
     return (
-      <InputStyles
+      <StyledInput
         type="text"
         maxLength="12"
         placeholder="Enter a hex or RGB code"

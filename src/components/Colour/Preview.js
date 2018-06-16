@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import PreviewDetails from '../components/PreviewDetails';
-import SubmitButton from '../components/SubmitButton';
+import PreviewDetails from './PreviewDetails';
+import SubmitButton from './SubmitButton';
 
 const PreviewWrapper = styled.div`
   -webkit-transition: opacity 0.25s 0.25s ease-out;

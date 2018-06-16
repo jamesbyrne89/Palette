@@ -4,7 +4,8 @@ import Title from './Title';
 import { AddPaletteButton } from './Buttons/Buttons';
 import Portal from './PopupPortal';
 import Toaster, { StyledToasterOverlay, StyledToaster } from './Toaster';
-import AddColourInput from './AddColourInput';
+import { Fade, OpenToaster } from '../animations/Tweens';
+import NewPalette from './Palette/NewPalette';
 
 const StyledViewHeader = styled.header`
   display: flex;
@@ -19,19 +20,24 @@ const ViewHeader = props => {
     <StyledViewHeader {...props}>
       <Title title={'Palettes'} />
       <Toaster
-        render={({ open }, doOpen, close) =>
-          open ? (
+        render={(visible, show, hide) =>
+          visible ? (
             <Fragment>
               <Portal>
-                <StyledToasterOverlay onClick={close} />
-                <StyledToaster>
-                  <AddColourInput {...props} />
-                </StyledToaster>
+                <StyledToasterOverlay onClick={hide} />
+                <NewPalette />
+                <OpenToaster initialPose={'hidden'} pose={'visible'}>
+                  <StyledToaster />
+                </OpenToaster>
               </Portal>
-              <AddPaletteButton isOpen={open} openToaster={doOpen} {...props} />
+              <AddPaletteButton
+                isOpen={visible}
+                openToaster={show}
+                {...props}
+              />
             </Fragment>
           ) : (
-            <AddPaletteButton isOpen={open} openToaster={doOpen} {...props} />
+            <AddPaletteButton isOpen={visible} openToaster={show} {...props} />
           )
         }
       />

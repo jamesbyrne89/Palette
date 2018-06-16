@@ -5,7 +5,7 @@ import Header from './components/Header';
 
 import ViewHeader from './components/ViewHeader';
 import LoadingIcon from './components/LoadingIcon';
-import AddColourInput from './components/AddColourInput';
+import AddColourInput from './components/Colour/AddColourInput';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
