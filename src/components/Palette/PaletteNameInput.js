@@ -23,20 +23,25 @@ class PaletteNameInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      colourToAdd: null,
-      valid: null
+      value: ''
     };
+  }
+
+  handleAddPalette() {
+    this.props.addPalette(this.state.value);
   }
 
   handleChange = e => {
     e.stopPropagation();
+    this.setState({ value: e.target.value });
+    if (e.keyCode === 13) {
+      this.handleAddPalette(e.target.value);
+    }
   };
 
   handleSubmit = () => {
-    this.props.handleAddColour();
-    this.setState({ value: '', colourToAdd: null, valid: null });
-    this.props.previewHandler();
+    this.props.handleAddPalette();
+    this.setState({ value: '' });
   };
 
   handleErrors = () => {
@@ -48,7 +53,7 @@ class PaletteNameInput extends Component {
       <StyledInput
         type="text"
         maxLength="12"
-        placeholder="Enter a hex or RGB code"
+        placeholder="Give your palette a name"
         valid={this.state.valid}
         onChange={this.handleChange}
         onKeyUp={this.handleChange}

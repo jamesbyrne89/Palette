@@ -5,7 +5,7 @@ const NewPalette = props => {
   return (
     <div>
       <h2>New Palette:</h2>
-      <PaletteNameInput />
+      <PaletteNameInput {...props} />
     </div>
   );
 };

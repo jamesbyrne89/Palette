@@ -159,7 +159,17 @@ class App extends Component {
     }
   }
 
-  addPalette() {}
+  addPalette(name) {
+    if (
+      this.state.palettes.filter(palette => palette.name === name).length === 0
+    ) {
+      const newPalette = {
+        name,
+        colours: []
+      };
+      this.setState({ palettes: this.state.palettes.concat(newPalette) });
+    }
+  }
 
   removeColour(paletteName, hex) {
     const matchingPalette = this.state.palettes.filter(
@@ -195,7 +205,7 @@ class App extends Component {
           />
           <ColumnMain>
             <div className="colours">
-              <ViewHeader />
+              <ViewHeader addPalette={this.addPalette} />
               <PalettesContainer
                 palettes={palettes}
                 addColour={this.addColour}

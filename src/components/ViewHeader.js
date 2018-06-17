@@ -25,9 +25,11 @@ const ViewHeader = props => {
             <Fragment>
               <Portal>
                 <StyledToasterOverlay onClick={hide} />
-                <NewPalette />
+
                 <OpenToaster initialPose={'hidden'} pose={'visible'}>
-                  <StyledToaster />
+                  <StyledToaster>
+                    <NewPalette addPalette={props.addPalette} />
+                  </StyledToaster>
                 </OpenToaster>
               </Portal>
               <AddPaletteButton
