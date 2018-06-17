@@ -18,7 +18,12 @@ class PalettesContainer extends Component {
     return (
       <StyledPalettesContainer>
         {palettes.map((palette, i) => (
-          <Palette palette={palette} addColour={this.props.addColour} key={i} />
+          <Palette
+            palette={palette}
+            addColour={this.props.addColour}
+            removeColour={this.props.removeColour}
+            key={i}
+          />
         ))}
       </StyledPalettesContainer>
     );

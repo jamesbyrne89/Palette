@@ -32,18 +32,18 @@ const ListOfColours = styled.div`
 const ColourList = props => {
   return (
     <ListOfColours>
-      {/* {props.handleLoading()} */}
-      {props.colours.map((col, i) => (
-        <ColourStyles key={i} colour={col}>
-          <Colour
-            key={i}
-            index={i}
-            colour={col}
-            removeColour={props.removeColour}
-          />
-        </ColourStyles>
-      ))}
-      {/* <button className="colour-add">+</button> */}
+      {props.colours &&
+        props.colours.map((col, i) => (
+          <ColourStyles key={i} colour={col}>
+            <Colour
+              key={i}
+              index={i}
+              colour={col}
+              palette={props.palette}
+              removeColour={props.removeColour}
+            />
+          </ColourStyles>
+        ))}
     </ListOfColours>
   );
 };

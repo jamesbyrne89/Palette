@@ -7,7 +7,11 @@ const StyledPaletteColours = styled.div``;
 
 const PaletteColours = props => (
   <StyledPaletteColours>
-    <ColourList colours={props.palette.colours} />
+    <ColourList
+      removeColour={props.removeColour}
+      palette={props.palette.name}
+      colours={props.palette.colours}
+    />
     {/* {props.palette.colours &&
       props.palette.colours.map((colour, i) => <Colour colour={colour} />)} */}
   </StyledPaletteColours>

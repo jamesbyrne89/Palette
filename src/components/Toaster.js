@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const StyledToaster = styled.div`
   padding: 1em;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;

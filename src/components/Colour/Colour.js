@@ -83,15 +83,15 @@ const ColourRgb = styled.div`
 `;
 
 const Colour = props => {
-  const { colour, removeColour, index } = props;
+  const { palette, colour, removeColour, index, hex } = props;
 
-  const handleRemoveColour = index => {
-    removeColour(index);
+  const handleRemoveColour = (palette, hex) => {
+    removeColour(palette, hex);
   };
 
   return (
     <ColourStyles>
-      <DeleteButton onClick={() => handleRemoveColour(index)}>
+      <DeleteButton onClick={() => handleRemoveColour(palette, colour.hex)}>
         <Delete />
       </DeleteButton>
       <ColourSwatch style={{ background: colour.hex }} />

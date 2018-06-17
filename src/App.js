@@ -161,13 +161,24 @@ class App extends Component {
 
   addPalette() {}
 
-  removeColour(index) {
-    let newColourList = this.state.colours;
-    this.state.colours.splice(index, 1);
+  removeColour(paletteName, hex) {
+    const matchingPalette = this.state.palettes.filter(
+      palette => palette.name === paletteName
+    )[0];
 
-    this.setState({
-      colours: newColourList
+    const newColours = matchingPalette.colours.filter(
+      colour => colour.hex === hex
+    );
+
+    const newState = this.state.palettes.map(item => {
+      let newColoursArray;
+      if (item.name === paletteName) {
+        newColoursArray = item.colours.filter(colour => colour.hex !== hex);
+        item.colours = newColoursArray;
+      }
+      return item;
     });
+    this.setState({ palettes: newState });
   }
 
   render() {
@@ -188,6 +199,7 @@ class App extends Component {
               <PalettesContainer
                 palettes={palettes}
                 addColour={this.addColour}
+                removeColour={this.removeColour}
               />
             </div>
           </ColumnMain>
