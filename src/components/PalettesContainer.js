@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Palette from './Palette/Palette';
+import withLoader from './LoadingIcon';
 
 const StyledPalettesContainer = styled.section`
   display: grid;
@@ -14,7 +15,7 @@ class PalettesContainer extends Component {
   }
 
   render() {
-    const { palettes } = this.props;
+    const { palettes, loading } = this.props;
     return (
       <StyledPalettesContainer>
         {palettes.map((palette, i) => (
@@ -22,6 +23,7 @@ class PalettesContainer extends Component {
             palette={palette}
             addColour={this.props.addColour}
             removeColour={this.props.removeColour}
+            loading={loading}
             key={i}
           />
         ))}

@@ -100,7 +100,7 @@ class App extends Component {
       state: 'palettes',
       asArray: true,
       then: function() {
-        this.setState({ loading: false });
+        setTimeout(() => this.setState({ loading: false }), 1000);
         var cached = JSON.stringify(this.state.colours);
         localStorage.setItem('colours', cached);
       },
@@ -200,6 +200,7 @@ class App extends Component {
                 palettes={palettes}
                 addColour={this.addColour}
                 removeColour={this.removeColour}
+                loading={this.state.loading}
               />
             </div>
           </ColumnMain>
