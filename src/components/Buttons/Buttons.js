@@ -30,7 +30,7 @@ export const AddColourButton = props => {
 };
 
 export const DeletePaletteButton = props => (
-  <StyledButton>
+  <StyledButton onClick={() => props.removePalette(props.paletteName)}>
     <Delete />
   </StyledButton>
 );

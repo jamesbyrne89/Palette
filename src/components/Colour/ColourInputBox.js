@@ -138,7 +138,7 @@ class ColourInputBox extends Component {
         onChange={this.handleChange}
         onKeyUp={this.handleChange}
         value={this.state.value}
-        autofocus
+        autoFocus={true}
       />
     );
   }

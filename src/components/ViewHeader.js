@@ -28,7 +28,7 @@ const ViewHeader = props => {
 
                 <OpenToaster initialPose={'hidden'} pose={'visible'}>
                   <StyledToaster>
-                    <NewPalette addPalette={props.addPalette} />
+                    <NewPalette hide={hide} addPalette={props.addPalette} />
                   </StyledToaster>
                 </OpenToaster>
               </Portal>

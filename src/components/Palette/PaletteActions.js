@@ -35,7 +35,10 @@ const PaletteActions = props => (
       }
     />
 
-    <DeletePaletteButton />
+    <DeletePaletteButton
+      paletteName={props.palette.name}
+      removePalette={props.removePalette}
+    />
   </StyledActions>
 );
 

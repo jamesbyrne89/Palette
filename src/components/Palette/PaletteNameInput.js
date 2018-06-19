@@ -25,10 +25,13 @@ class PaletteNameInput extends Component {
     this.state = {
       value: ''
     };
+
+    this.inputRef = React.createRef();
   }
 
   handleAddPalette() {
     this.props.addPalette(this.state.value);
+    this.props.hide();
   }
 
   handleChange = e => {
@@ -48,6 +51,10 @@ class PaletteNameInput extends Component {
     this.setState({ valid: false });
   };
 
+  componentDidMount() {
+    // console.log(this.inputRef.focus());
+  }
+
   render() {
     return (
       <StyledInput
@@ -58,7 +65,7 @@ class PaletteNameInput extends Component {
         onChange={this.handleChange}
         onKeyUp={this.handleChange}
         value={this.state.value}
-        autofocus
+        ref={input => (this.inputRef = input)}
       />
     );
   }

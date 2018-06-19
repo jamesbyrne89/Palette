@@ -90,6 +90,7 @@ class App extends Component {
     };
     this.addColour = this.addColour.bind(this);
     this.addPalette = this.addPalette.bind(this);
+    this.removePalette = this.removePalette.bind(this);
     this.removeColour = this.removeColour.bind(this);
     this.handleLoading = this.handleLoading.bind(this);
   }
@@ -171,6 +172,12 @@ class App extends Component {
     }
   }
 
+  removePalette(name) {
+    this.setState({
+      palettes: this.state.palettes.filter(palette => palette.name !== name)
+    });
+  }
+
   removeColour(paletteName, hex) {
     const matchingPalette = this.state.palettes.filter(
       palette => palette.name === paletteName
@@ -210,6 +217,7 @@ class App extends Component {
                 palettes={palettes}
                 addColour={this.addColour}
                 removeColour={this.removeColour}
+                removePalette={this.removePalette}
                 loading={this.state.loading}
               />
             </div>
