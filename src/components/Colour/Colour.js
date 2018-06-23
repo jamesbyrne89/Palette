@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -82,40 +82,57 @@ const ColourRgb = styled.div`
   }
 `;
 
-const Colour = props => {
-  const { palette, colour, removeColour, index, hex } = props;
+class Colour extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      copiedHex: false,
+      copiedRGB: false
+    };
+  }
 
-  const handleRemoveColour = (palette, hex) => {
-    removeColour(palette, hex);
+  handleRemoveColour = (palette, hex) => {
+    this.props.removeColour(palette, hex);
   };
 
-  return (
-    <ColourStyles>
-      <DeleteButton onClick={() => handleRemoveColour(palette, colour.hex)}>
-        <Delete />
-      </DeleteButton>
-      <ColourSwatch style={{ background: colour.hex }} />
-      <ColourDetails>
-        <CopyToClipboard text={colour.hex} onCopy={() => console.log('copied')}>
-          <ColourHex>
-            {colour.hex}
-            <ColourDetailsHoverOverlay>
-              <span>Copy Hex</span>
-            </ColourDetailsHoverOverlay>
-          </ColourHex>
-        </CopyToClipboard>
-        <CopyToClipboard text={colour.rgb} onCopy={() => console.log('copied')}>
-          <ColourRgb>
-            {colour.rgb}
-            <ColourDetailsHoverOverlay>
-              <span>Copy RGB</span>
-            </ColourDetailsHoverOverlay>
-          </ColourRgb>
-        </CopyToClipboard>
-      </ColourDetails>
-    </ColourStyles>
-  );
-};
+  render() {
+    const { palette, colour, removeColour, index, hex } = this.props;
+    return (
+      <ColourStyles>
+        <DeleteButton
+          onClick={() => this.handleRemoveColour(palette, colour.hex)}
+        >
+          <Delete />
+        </DeleteButton>
+        <ColourSwatch style={{ background: colour.hex }} />
+        <ColourDetails>
+          <CopyToClipboard
+            text={colour.hex}
+            onCopy={() => this.setState({ copiedHex: true, copiedRGB: false })}
+          >
+            <ColourHex>
+              {colour.hex}
+              <ColourDetailsHoverOverlay>
+                <span>{this.state.copiedHex ? 'Copied!' : 'Copy Hex'}</span>
+              </ColourDetailsHoverOverlay>
+            </ColourHex>
+          </CopyToClipboard>
+          <CopyToClipboard
+            text={colour.rgb}
+            onCopy={() => this.setState({ copiedRGB: true, copiedHex: false })}
+          >
+            <ColourRgb>
+              {colour.rgb}
+              <ColourDetailsHoverOverlay>
+                <span>{this.state.copiedRGB ? 'Copied!' : 'Copy RGB'}</span>
+              </ColourDetailsHoverOverlay>
+            </ColourRgb>
+          </CopyToClipboard>
+        </ColourDetails>
+      </ColourStyles>
+    );
+  }
+}
 
 Colour.propTypes = {
   colour: PropTypes.object.isRequired,
