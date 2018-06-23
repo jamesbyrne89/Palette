@@ -96,7 +96,7 @@ class Colour extends Component {
   };
 
   render() {
-    const { palette, colour, removeColour, index, hex } = this.props;
+    const { palette, colour } = this.props;
     return (
       <ColourStyles>
         <DeleteButton
@@ -108,7 +108,13 @@ class Colour extends Component {
         <ColourDetails>
           <CopyToClipboard
             text={colour.hex}
-            onCopy={() => this.setState({ copiedHex: true, copiedRGB: false })}
+            onCopy={() =>
+              this.setState({ copiedHex: true, copiedRGB: false }, () => {
+                setTimeout(() => {
+                  this.setState({ copiedHex: false });
+                }, 2000);
+              })
+            }
           >
             <ColourHex>
               {colour.hex}
@@ -119,7 +125,13 @@ class Colour extends Component {
           </CopyToClipboard>
           <CopyToClipboard
             text={colour.rgb}
-            onCopy={() => this.setState({ copiedRGB: true, copiedHex: false })}
+            onCopy={() =>
+              this.setState({ copiedRGB: true, copiedHex: false }, () => {
+                setTimeout(() => {
+                  this.setState({ copiedRGB: false });
+                }, 2000);
+              })
+            }
           >
             <ColourRgb>
               {colour.rgb}

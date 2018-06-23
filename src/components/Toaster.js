@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import styled from 'styled-components';
 
 export const StyledToaster = styled.div`
@@ -45,7 +45,7 @@ class Toaster extends Component {
 
   render() {
     const { visible } = this.state;
-    const { render, children } = this.props;
+    const { render } = this.props;
     return render(visible, this.show, this.hide);
   }
 }

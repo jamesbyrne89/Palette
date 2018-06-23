@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import './styles/styles.css';
 import base, { connectedRef } from './db/base';
 import Header from './components/Header';
-
 import ViewHeader from './components/ViewHeader';
 import LoadingIcon from './components/LoadingIcon';
-import AddColourInput from './components/Colour/AddColourInput';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
@@ -197,10 +195,9 @@ class App extends Component {
     });
     this.setState({ palettes: newState });
   }
-  
 
   render() {
-    const { colours, colourToAdd, palettes } = this.state;
+    const { palettes } = this.state;
 
     return (
       <AppStyles>

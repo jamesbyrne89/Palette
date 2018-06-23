@@ -1,6 +1,5 @@
 import React from 'react';
-import '../styles/styles.css';
-import Colour from './Colour/Colour';
+import Colour from '../Colour/Colour';
 import styled from 'styled-components';
 
 const ColourStyles = styled.div`
@@ -30,10 +29,12 @@ const ListOfColours = styled.div`
 `;
 
 const ColourList = props => {
+  const coloursToRender = props =>
+    props.colours && props.showAll ? props.colours : props.colours.slice(0, 4);
   return (
     <ListOfColours>
       {props.colours &&
-        props.colours.map((col, i) => (
+        coloursToRender(props).map((col, i) => (
           <ColourStyles key={i} colour={col}>
             <Colour
               key={i}
