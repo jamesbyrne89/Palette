@@ -197,6 +197,7 @@ class App extends Component {
     });
     this.setState({ palettes: newState });
   }
+  
 
   render() {
     const { colours, colourToAdd, palettes } = this.state;
@@ -205,11 +206,6 @@ class App extends Component {
       <AppStyles>
         <Header />
         <Container>
-          <AddColourInput
-            colours={colours}
-            previewColour={this.previewColour}
-            colourToAdd={colourToAdd}
-          />
           <ColumnMain>
             <div className="colours">
               <ViewHeader addPalette={this.addPalette} />
