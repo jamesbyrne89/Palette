@@ -7,6 +7,7 @@ import LoadingIcon from './components/LoadingIcon';
 import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
+import NavBar from './components/Navigation/NavBar';
 
 const body = document.querySelector('body');
 
@@ -16,13 +17,7 @@ const AppStyles = styled.div`
   position: relative;
   min-height: 100vh;
   background: var(--backgroundColour);
-  // background: linear-gradient(
-  //   -45deg,
-  //   var(--backgroundColour) 0%,
-  //   var(--backgroundColour) 50%,
-  //   var(--backgroundColourSecondary) 50%,
-  //   var(--backgroundColourSecondary) 100%
-  // );
+
   color: var(--textColour);
   font-family: var(--bodyFont);
   display: -webkit-box;
@@ -202,6 +197,7 @@ class App extends Component {
     return (
       <AppStyles>
         <Header />
+        <NavBar {...this.state} />
         <Container>
           <ColumnMain>
             <div className="colours">
