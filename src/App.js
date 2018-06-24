@@ -62,21 +62,8 @@ class App extends Component {
     super();
     this.state = {
       colours: [],
-      palettes: [
-        {
-          name: 'Warehouse',
-          colours: []
-        },
-        {
-          name: 'My Palette',
-          colours: [
-            {
-              hex: '#b4d455',
-              rgb: '1,1,1'
-            }
-          ]
-        }
-      ],
+      palettes: [],
+      favourites: [],
       loading: true,
       online: true,
       showStatusBar: false
@@ -86,6 +73,8 @@ class App extends Component {
     this.removePalette = this.removePalette.bind(this);
     this.removeColour = this.removeColour.bind(this);
     this.handleLoading = this.handleLoading.bind(this);
+    this.addToFavourites = this.addToFavourites.bind(this);
+    this.removeFromFavourites = this.removeFromFavourites.bind(this);
   }
 
   componentWillMount() {
@@ -131,6 +120,16 @@ class App extends Component {
     } else {
       return null;
     }
+  }
+
+  addToFavourites(colour) {
+    this.setState({ favourites: [...this.state.favourites, colour] });
+  }
+
+  removeFromFavourites(colour) {
+    this.setState({
+      favourites: this.state.favourites.filter(fav => fav.hex !== colour.hex)
+    });
   }
 
   addColour(newColour, paletteName) {
@@ -192,7 +191,7 @@ class App extends Component {
   }
 
   render() {
-    const { palettes } = this.state;
+    const { palettes, favourites } = this.state;
 
     return (
       <AppStyles>
@@ -204,10 +203,13 @@ class App extends Component {
               <ViewHeader addPalette={this.addPalette} />
               <PalettesContainer
                 palettes={palettes}
+                favourites={favourites}
                 addColour={this.addColour}
                 removeColour={this.removeColour}
                 removePalette={this.removePalette}
                 loading={this.state.loading}
+                addToFavourites={this.addToFavourites}
+                removeFromFavourites={this.removeFromFavourites}
               />
             </div>
           </ColumnMain>

@@ -41,7 +41,10 @@ const ColourList = props => {
               index={i}
               colour={col}
               palette={props.palette}
+              favourites={props.favourites}
               removeColour={props.removeColour}
+              addToFavourites={props.addToFavourites}
+              removeFromFavourites={props.removeFromFavourites}
             />
           </ColourStyles>
         ))}

@@ -37,6 +37,7 @@ class NavBar extends Component {
   render() {
     return (
       <StyledNavBar>
+        <NavMenu title={'Favourites'} render={() => null} />
         <NavMenu
           title={'Palettes'}
           render={({ open }) => (

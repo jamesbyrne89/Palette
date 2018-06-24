@@ -42,7 +42,11 @@ class Palette extends Component {
         ) : (
           <Fragment>
             <PaletteHeader {...this.props} />
-            <PaletteColours showAll={this.state.showAll} {...this.props} />
+            <PaletteColours
+              showAll={this.state.showAll}
+              {...this.props}
+              colours={this.props.palette.colours}
+            />
             {palette.colours &&
               palette.colours.length > 4 && (
                 <StyledShowMoreColours>

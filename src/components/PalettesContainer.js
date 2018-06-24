@@ -17,20 +17,26 @@ class PalettesContainer extends Component {
   render() {
     const {
       palettes,
+      favourites,
       loading,
       addColour,
       removeColour,
-      removePalette
+      removePalette,
+      addToFavourites,
+      removeFromFavourites
     } = this.props;
     return (
       <StyledPalettesContainer>
         {palettes.map((palette, i) => (
           <Palette
             palette={palette}
+            favourites={favourites}
             addColour={addColour}
             removeColour={removeColour}
             removePalette={removePalette}
             loading={loading}
+            addToFavourites={addToFavourites}
+            removeFromFavourites={removeFromFavourites}
             key={i}
           />
         ))}

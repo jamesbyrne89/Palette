@@ -6,12 +6,7 @@ const StyledPaletteColours = styled.div``;
 
 const PaletteColours = props => (
   <StyledPaletteColours>
-    <ColourList
-      removeColour={props.removeColour}
-      palette={props.palette.name}
-      colours={props.palette.colours}
-      showAll={props.showAll}
-    />
+    <ColourList {...props} />
   </StyledPaletteColours>
 );
 
