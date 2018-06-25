@@ -13,6 +13,7 @@ export const StyledToaster = styled.div`
   height: 200px;
   background: var(--contentBackgroundColour);
   color: #fff;
+  z-index: 2;
 `;
 
 export const StyledToasterOverlay = styled.div`
@@ -23,6 +24,7 @@ export const StyledToasterOverlay = styled.div`
   bottom: 0;
   opacity: 0.95;
   background: var(--backgroundColour);
+  z-index: 2;
 `;
 
 class Toaster extends Component {

@@ -34,10 +34,31 @@ const PaletteActions = props => (
         )
       }
     />
-
-    <DeletePaletteButton
-      paletteName={props.palette.name}
-      removePalette={props.removePalette}
+    <Toaster
+      render={(visible, show, hide) =>
+        visible ? (
+          <Fragment>
+            <Portal>
+              <StyledToasterOverlay onClick={hide} />
+              <OpenToaster initialPose={'hidden'} pose={'visible'}>
+                <StyledToaster>
+                  <DeletePaletteButton
+                    paletteName={props.palette.name}
+                    openToaster={show}
+                    removePalette={props.removePalette}
+                  />
+                </StyledToaster>
+              </OpenToaster>
+            </Portal>
+          </Fragment>
+        ) : (
+          <DeletePaletteButton
+            paletteName={props.palette.name}
+            openToaster={show}
+            removePalette={props.removePalette}
+          />
+        )
+      }
     />
   </StyledActions>
 );

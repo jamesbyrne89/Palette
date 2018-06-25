@@ -15,10 +15,15 @@ const StyledTextButton = styled.button`
   background: none;
   color: #fff;
   padding: 1em;
+  border-radius: 3px;
   line-height: 0.8;
   font-weight: bold;
   background: var(--contentBackgroundColour);
   cursor: pointer;
+  transition: transform 0.15s ease-out;
+  &:hover {
+    transform: translateY(-1px);
+  }
 `;
 
 export const AddColourButton = props => {
@@ -30,7 +35,7 @@ export const AddColourButton = props => {
 };
 
 export const DeletePaletteButton = props => (
-  <StyledButton onClick={() => props.removePalette(props.paletteName)}>
+  <StyledButton onClick={() => props.openToaster(props)}>
     <Delete />
   </StyledButton>
 );

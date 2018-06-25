@@ -28,6 +28,10 @@ const AppStyles = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   overflow: hidden;
+  ::-moz-selection {
+    color: red;
+    background: yellow;
+  }
 `;
 
 const Container = styled.main`

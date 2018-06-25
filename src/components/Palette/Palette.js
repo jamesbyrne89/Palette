@@ -7,7 +7,6 @@ import LoadingIcon from '../LoadingIcon';
 const StyledPalette = styled.article`
   background: var(--contentBackgroundColour);
   padding: 0.5em 2em 1em;
-  min-height: 318px;
 `;
 
 const StyledShowMoreColours = styled.div`
