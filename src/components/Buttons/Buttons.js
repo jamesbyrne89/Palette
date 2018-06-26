@@ -12,13 +12,14 @@ const StyledButton = styled.button`
 
 const StyledTextButton = styled.button`
   border: none;
-  background: none;
-  color: #fff;
+  ${props =>
+    props.background
+      ? `background: ${props.background};`
+      : `background: var(--contentBackgroundColour);`} color: #fff;
   padding: 1em;
   border-radius: 3px;
   line-height: 0.8;
   font-weight: bold;
-  background: var(--contentBackgroundColour);
   cursor: pointer;
   transition: transform 0.15s ease-out;
   &:hover {
@@ -38,6 +39,14 @@ export const DeletePaletteButton = props => (
   <StyledButton onClick={() => props.openToaster(props)}>
     <Delete />
   </StyledButton>
+);
+
+export const ConfirmButton = props => (
+  <StyledTextButton {...props}>{props.render()}</StyledTextButton>
+);
+
+export const CancelButton = props => (
+  <StyledTextButton {...props}>{props.render()}</StyledTextButton>
 );
 
 export const AddPaletteButton = props => (

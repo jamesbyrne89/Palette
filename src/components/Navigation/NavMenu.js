@@ -14,7 +14,7 @@ const StyledNavMenuTitle = styled.h3`
   margin: 0;
   padding: 0.75em 1em;
   &:hover {
-    background: #5f6f8e;
+    background: var(--contentBackgroundLighter);
   }
 `;
 

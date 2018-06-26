@@ -1,15 +1,27 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { AddColourButton, DeletePaletteButton } from '../Buttons/Buttons';
+import {
+  AddColourButton,
+  DeletePaletteButton,
+  ConfirmButton,
+  CancelButton
+} from '../Buttons/Buttons';
 import Portal from '../PopupPortal';
 import Toaster, { StyledToasterOverlay, StyledToaster } from '../Toaster';
 import AddColourInput from '../Colour/AddColourInput';
 import { Fade, OpenToaster } from '../../animations/Tweens';
+import { FlexSpaced } from '../Helpers';
 
 const StyledActions = styled.article`
   display: flex;
   height: 1rem;
   width: 20%;
+`;
+
+const StyledModalText = styled.div`
+  width: 100%;
+  text-align: center;
+  margin: 2rem auto 1rem;
 `;
 
 const PaletteActions = props => (
@@ -40,15 +52,21 @@ const PaletteActions = props => (
           <Fragment>
             <Portal>
               <StyledToasterOverlay onClick={hide} />
-              <OpenToaster initialPose={'hidden'} pose={'visible'}>
-                <StyledToaster>
-                  <DeletePaletteButton
-                    paletteName={props.palette.name}
-                    openToaster={show}
-                    removePalette={props.removePalette}
+              <StyledToaster>
+                <StyledModalText>Delete {props.palette.name}?</StyledModalText>
+                <FlexSpaced>
+                  <ConfirmButton
+                    onClick={() => props.removePalette(props.palette.name)}
+                    background={'red'}
+                    render={() => 'Confirm'}
                   />
-                </StyledToaster>
-              </OpenToaster>
+                  <CancelButton
+                    background={'var(--contentBackgroundLighter)'}
+                    onClick={hide}
+                    render={() => 'Cancel'}
+                  />
+                </FlexSpaced>
+              </StyledToaster>
             </Portal>
           </Fragment>
         ) : (
