@@ -14,7 +14,6 @@ const body = document.querySelector('body');
 body.addEventListener('mousemove', () => body.classList.add('mouse-enabled'));
 
 const AppStyles = styled.div`
-  --contentBackgroundLighter: #5f6f8e;
   position: relative;
   min-height: 100vh;
   background: var(--backgroundColour);

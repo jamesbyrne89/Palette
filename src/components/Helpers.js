@@ -9,6 +9,7 @@ export const FlexSpread = styled.div`
 export const FlexSpaced = styled.div`
   display: flex;
   justify-content: space-around;
+  ${props => props.margin && `margin: ${props.margin}`};
 `;
 
 export const FlexCentre = styled.div`

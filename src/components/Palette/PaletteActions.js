@@ -54,7 +54,7 @@ const PaletteActions = props => (
               <StyledToasterOverlay onClick={hide} />
               <StyledToaster>
                 <StyledModalText>Delete {props.palette.name}?</StyledModalText>
-                <FlexSpaced>
+                <FlexSpaced margin={'2.5rem auto 0;'}>
                   <ConfirmButton
                     onClick={() => props.removePalette(props.palette.name)}
                     background={'red'}

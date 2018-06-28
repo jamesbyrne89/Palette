@@ -22,6 +22,7 @@ const StyledTextButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.15s ease-out;
+  min-width: 6em;
   &:hover {
     transform: translateY(-1px);
   }

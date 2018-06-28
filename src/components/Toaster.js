@@ -12,6 +12,7 @@ export const StyledToaster = styled.div`
   width: 500px;
   height: 200px;
   background: var(--contentBackgroundColour);
+  font-family: var(--bodyFont);
   color: #fff;
   z-index: 2;
 `;
