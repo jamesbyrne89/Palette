@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import ConnectionStatusBar from './components/ConnectionStatusBar';
 import PalettesContainer from './components/PalettesContainer';
 import NavBar from './components/Navigation/NavBar';
+import { Provider } from 'react-redux';
 
 const body = document.querySelector('body');
 
