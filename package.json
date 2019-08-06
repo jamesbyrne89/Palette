@@ -8,7 +8,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-pose": "^2.1.2",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "^3.0.1",
     "react-transition-group": "^2.3.1",
     "rodal": "^1.6.3",
     "styled-components": "^4.3.2"
