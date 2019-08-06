@@ -24,7 +24,7 @@
   "devDependencies": {
     "firebase": "^4.13.1",
     "gh-pages": "^2.1.0",
-    "prop-types": "^15.6.1",
+    "prop-types": "^15.7.2",
     "re-base": "^3.2.3"
   },
   "homepage": "http://jamesbyrne89.github.io/Palette"
